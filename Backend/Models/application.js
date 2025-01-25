@@ -7,7 +7,7 @@ const ApplicatonSchema =  new mongoose.Schema({
         ref:'Job',
         required:'true',
     },
-    Application:{
+    Applicant:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true,

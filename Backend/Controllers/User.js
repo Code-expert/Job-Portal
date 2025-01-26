@@ -1,4 +1,4 @@
-import {User} from '../Models/User.js'
+import  User  from '../Models/User.js'
 import bcrypt from   "bcryptjs"
 import jwt from "jsonwebtoken";
 
@@ -87,7 +87,7 @@ export const login = async (req,res) => {
         }
 
         return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true , sameSite:'strict'}).json({
-            message:`Welcome Back ${user.Fullnames}`,
+            message:`Welcome Back ${user.Fullname}`,
             user,
             success:true,
         });
@@ -105,19 +105,15 @@ export const logout = async  (req,res) =>{
    } catch (error) {
     console.log("Logout error",error);
    }
-}
+};
 export const updateProfile = async (req,res) =>{
     try {
         const {Fullname,Email,PhoneNumber,bio,skills} = req.body;
-        const file =  req.file;
-        if(!Fullname||!Email||!PhoneNumber||!bio||!skills){
-            return res.status(400).json({
-                message:"Something is missing",
-                success:false
-            });
-        };
-
-        const skillsArray = skills.split(",");
+        let skillsArray;
+        if (skills) {
+             skillsArray = skills.split(",");
+        }
+       
         const userId = req.id;
 
         let user = await User.findById(userId);
@@ -129,11 +125,11 @@ export const updateProfile = async (req,res) =>{
             })
         }
         //updating the data
-        user.Fullname=Fullname,
-        user.Email=Email,
-        user.PhoneNumber=PhoneNumber,
-        user.Profile.skills=skillsArray,
-        user.Profile.bio= bio
+        if(Fullname) user.Fullname=Fullname
+        if(Email) user.Email=Email
+        if(PhoneNumber) user.PhoneNumber=PhoneNumber
+        if(bio) user.Profile.bio= bio
+        if(skills) user.Profile.skills=skillsArray
 
         await user.save();
 

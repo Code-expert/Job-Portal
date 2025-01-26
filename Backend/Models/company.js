@@ -4,6 +4,7 @@ const CompanySchema = new mongoose.Schema({
     companyName:{
         type:String,
         required:true,
+        unique:true,
     },
     description:{
         type:String,
@@ -17,7 +18,7 @@ const CompanySchema = new mongoose.Schema({
     logo:{
         type:String,
     },
-    userid:{
+    userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true,

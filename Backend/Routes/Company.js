@@ -6,10 +6,10 @@ const Router = express.Router();
 Router.route('/register')
       .post(isAuthenticated,registerCompany);
 Router.route('/get')
-      .post(isAuthenticated,getCompanies);
+      .get(isAuthenticated,getCompanies);
 Router.route('/get/:id')
       .get(isAuthenticated,getCompanyById);
 Router.route('/update/:id')
-      .post(isAuthenticated,updateCompany);      
+      .put(isAuthenticated,updateCompany);      
 
 export default Router;

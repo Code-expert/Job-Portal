@@ -31,13 +31,18 @@ export const registerCompany = async (req, res) => {
 };
 export const getCompanies = async (req, res) => {
     try {
-        let companies = await Company.find({ userId: req.id });
+        const userId = req.id;
+        const companies = await Company.find({ userId });
         if (!companies) {
             return res.status(400).json({
                 message: "No Company Found",
                 success: false,
             })
         }
+        return res.status(200).json({
+            companies,
+            success: true,
+        });
 
     } catch (error) {
         console.log("Get Companies Error", error);
@@ -46,7 +51,7 @@ export const getCompanies = async (req, res) => {
 export const getCompanyById = async (req, res) => {
     try {
         const companyId = req.params.id;
-        const company = await Company.findById({ companyId });
+        const company = await Company.findById( companyId );
         if (!company) {
             return res.status(400).json({
                 message: "Company not found",
@@ -72,13 +77,13 @@ export const updateCompany = async (req, res) => {
             website,
             location,
         }
+        const company = await Company.findByIdAndUpdate(companyId, updateData, { new: true });
         if (!company) {
             return res.status(400).json({
                 message: "Company not found",
                 success: false,
             })
         }
-        const company = await Company.findByIdAndUpdate(companyId, updateData, { new: true });
         return res.status(200).json({
             message: "Company Updated Successfully",
             success: true,

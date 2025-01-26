@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoDb from './Connection/connect.js';
 import userRouter from './Routes/User.js';
+import companyRouter from './Routes/Company.js';
 const app = express();
 dotenv.config({});
 
@@ -25,6 +26,7 @@ app.use(cors(corsOptions));
 const PORT =process.env.PORT||3000;
 
 app.use('/api/v1/user',userRouter);
+app.use('/api/v1/company',companyRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

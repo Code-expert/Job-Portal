@@ -1,34 +1,92 @@
 import Company from '../Models/Company.js';
 
-export const registerCompany = async (req,res) =>{
+export const registerCompany = async (req, res) => {
     try {
-        const {companyName} = req.body;
-        if (companyName) {
+        const { companyName } = req.body;
+        if (!companyName) {
             return res.status(400).json({
-                message:"Company Name is required",
-                success:false,
+                message: "Company Name is required",
+                success: false,
             })
         }
-        let company = await Company.findOne({companyName});
+        let company = await Company.findOne({ companyName });
         if (company) {
             return res.status(400).json({
-                message:"Company already exists with this name",
-                success:false,
+                message: "Company already exists with this name",
+                success: false,
             })
         }
         await Company.create({
-            name:companyName,
-            description:req.body.description,
-            website:req.body.website,
-            location:req.body.location,
-            logo:req.body.logo,
-            userId:req.id,
+            name: companyName,
+            description: req.body.description,
+            website: req.body.website,
+            location: req.body.location,
+            logo: req.body.logo,
+            userId: req.id,
         });
         return res.status(201).json({
-            message:"Company Registered Successfully",
-            success:true,
-        });S
+            message: "Company Registered Successfully",
+            success: true,
+        });
     } catch (error) {
-       console.log("Register Company error",error); 
+        console.log("Register Company error", error);
+    }
+};
+export const getCompanies = async (req, res) => {
+    try {
+        let companies = await Company.find({ userId: req.id });
+        if (!companies) {
+            return res.status(400).json({
+                message: "No Company Found",
+                success: false,
+            })
+        }
+
+    } catch (error) {
+        console.log("Get Companies Error", error);
+    }
+};
+export const getCompanyById = async (req, res) => {
+    try {
+        const companyId = req.params.id;
+        const company = await Company.findById({ companyId });
+        if (!company) {
+            return res.status(400).json({
+                message: "Company not found",
+                success: false,
+            })
+        }
+        return res.status(200).json({
+            company,
+            success: true,
+        })
+    } catch (error) {
+        console.log("Get Company By Id Error", error);
+    }
+};
+export const updateCompany = async (req, res) => {
+    try {
+        const companyId = req.params.id;
+        const { companyName, description, website, location } = req.body;
+
+        const updateData = {
+            companyName,
+            description,
+            website,
+            location,
+        }
+        if (!company) {
+            return res.status(400).json({
+                message: "Company not found",
+                success: false,
+            })
+        }
+        const company = await Company.findByIdAndUpdate(companyId, updateData, { new: true });
+        return res.status(200).json({
+            message: "Company Updated Successfully",
+            success: true,
+        });
+    } catch (error) {
+        console.log("Update Company Error", error);
     }
 };

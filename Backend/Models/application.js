@@ -1,11 +1,11 @@
 
 import mongoose from "mongoose";
 
-const ApplicatonSchema =  new mongoose.Schema({
+const ApplicationSchema =  new mongoose.Schema({
     job:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Job',
-        required:'true',
+        required:true,
     },
     Applicant:{
         type:mongoose.Schema.Types.ObjectId,
@@ -18,5 +18,5 @@ const ApplicatonSchema =  new mongoose.Schema({
         default:'pending',
     }
 },{timestamps:true});
-const Application = mongoose.model('Application',ApplicatonSchema);
+const Application = mongoose.model('Application',ApplicationSchema);
 export default Application;

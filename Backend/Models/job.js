@@ -1,5 +1,6 @@
 
 import mongoose from "mongoose";
+import Application from "./application.js";
 
 const JobSchema = new mongoose.Schema({
     title:{
@@ -43,7 +44,7 @@ const JobSchema = new mongoose.Schema({
         ref:'User',
         required:true,
     },
-    application:[
+    applications:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:'Application',

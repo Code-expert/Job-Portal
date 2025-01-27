@@ -1,5 +1,5 @@
 import express from "express";
-import {createJob,getJobs,getJobById,updateJob,getAdminsJobs} from "../Controllers/Job.js";
+import {createJob,getJobs,getJobById,getAdminsJobs} from "../Controllers/Job.js";
 import isAuthenticated from "../Middlewares/isAuthenticated.js";
 const Router = express.Router();
 

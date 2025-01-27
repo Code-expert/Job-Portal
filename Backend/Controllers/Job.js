@@ -4,7 +4,7 @@ export const createJob = async (req, res) => {
     try {
         const{title,description,requirement,salary,ExperienceLevel,location,jobtype,Position,companyId} = req.body;
         const userId = req.id;
-        if (!title ||!description|| !requirement || !salary || !ExperienceLevel || !location || !jobtype || !Position ) {
+        if (!title ||!description|| !requirement || !salary || !ExperienceLevel || !location || !jobtype || !Position||!companyId ) {
             return res.status(400).json({
                 message: "Please fill all the fields",
                 success: false,
@@ -14,8 +14,8 @@ export const createJob = async (req, res) => {
         const job = await Job.create({
             title,
             description,
-            requirement,
-            salary,
+            requirement:requirement.split(","),
+            salary:Number(salary),
             ExperienceLevel,
             location,
             jobtype,
@@ -34,14 +34,31 @@ export const createJob = async (req, res) => {
 };
 export const getJobs = async (req, res) => {
     try {
-        const userId = req.id;
-        const jobs = await jobs.find({userId});
-        if (!jobs) {
+        const keyword = req.query.keyword ||"";
+        const query = {
+            $or:[
+                {title:{
+                    $regex:keyword,
+                    $options:"i",
+                }},
+                {description:{
+                    $regex:keyword,
+                    $options:"i",
+                }},
+               
+            ]
+        };
+        const jobs = await Job.find(query).populate({
+            path:"company",
+        }).sort("-createdAt");
+
+        if (!job) {
             return res.status(400).json({
-                message: "No Jobs Found",
+                message: "Job not found",
                 success: false,
             });
         };
+
         return res.status(200).json({
             jobs,
             success: true,
@@ -53,7 +70,9 @@ export const getJobs = async (req, res) => {
 export const getJobById = async (req, res) => {
     try {
         const jobId = req.params.id;
-        const job = await Job.findById(jobId);
+        const job = await Job.findById(jobId).populate({
+            path:"applications",
+        });
         if (!job) {
             return res.status(400).json({
                 message: "Job not found",
@@ -68,6 +87,28 @@ export const getJobById = async (req, res) => {
     } catch (error) {
      consoel.log("Get Job By Id Error",error);   
     }
+};
+export const getAdminsJobs = async (req, res) => {
+    try {
+        const adminId = req.id;
+        const jobs = await Job.find(adminId).populate({
+            path:"company",
+            createdAt:-1,
+        });
+        if (!jobs) {
+            return res.status(400).json({
+                message: "Jobs not found",
+                success: false,
+            });
+        };
+        return res.status(200).json({
+            jobs,
+            success: true,
+        });
+    }
+        catch(error) {
+            console.log("Get Admins Jobs Error",error);
+        }
 };
 export const updateJob = async (req, res) => {
     try {

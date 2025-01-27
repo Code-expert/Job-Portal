@@ -3,7 +3,7 @@ import {createJob,getJobs,getJobById,updateJob,getAdminsJobs} from "../Controlle
 import isAuthenticated from "../Middlewares/isAuthenticated.js";
 const Router = express.Router();
 
-Router.route('/register')
+Router.route('/create')
       .post(isAuthenticated,createJob);
 Router.route('/get')
       .get(isAuthenticated,getJobs);
@@ -11,7 +11,7 @@ Router.route('/get/:id')
       .get(isAuthenticated,getJobById);
 Router.route('/admin/job')
       .get(isAuthenticated,getAdminsJobs);
-Router.route('/update/:id')
-      .put(isAuthenticated,updateJob);      
+// Router.route('/update/:id')
+//       .put(isAuthenticated,updateJob);      
 
 export default Router;

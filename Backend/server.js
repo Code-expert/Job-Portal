@@ -6,6 +6,7 @@ import mongoDb from './Connection/connect.js';
 import userRouter from './Routes/User.js';
 import companyRouter from './Routes/Company.js';
 import jobRouter from './Routes/Job.js';
+import applicationRouter from './Routes/Application.js';
 const app = express();
 dotenv.config({});
 
@@ -29,6 +30,7 @@ const PORT =process.env.PORT||3000;
 app.use('/api/v1/user',userRouter);
 app.use('/api/v1/company',companyRouter);
 app.use('/api/v1/job',jobRouter);
+app.use('/api/v1/application',applicationRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

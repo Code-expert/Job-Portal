@@ -3,13 +3,13 @@ import {applyJobs,getApplications,getAppliedJobs,updateStatus} from "../Controll
 import isAuthenticated from "../Middlewares/isAuthenticated.js";
 const Router = express.Router();
 
-Router.route('/apply')
-      .post(isAuthenticated,applyJobs);
-Router.route('/getapplications')
+Router.route('/apply/:id')
+      .get(isAuthenticated,applyJobs);
+Router.route('/:id/applicants')
       .get(isAuthenticated,getApplications);
-Router.route('/getjobs')
+Router.route('/get')
       .get(isAuthenticated,getAppliedJobs);
-Router.route('/update')
-      .put(isAuthenticated,updateStatus);      
+Router.route('/status/:id/update')  
+      .post(isAuthenticated,updateStatus);      
 
 export default Router;

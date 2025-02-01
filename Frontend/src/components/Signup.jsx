@@ -41,6 +41,10 @@ function SignUp() {
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Password</label>
             <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <div>
+                <label className="block text-gray-600 text-sm">Profile Photo</label>
+                <input type="file" name="Profile" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
+              </div>
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Role</label>

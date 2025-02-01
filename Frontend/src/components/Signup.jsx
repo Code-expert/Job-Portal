@@ -1,7 +1,14 @@
 import { useState } from "react";
+import axios from 'axios';
+import USER_API_END_POINT from "../constant.js"
+import {useNavigate}from "react-router-dom";
+
+import { ToastContainer, toast } from 'react-toastify';
 
 function SignUp() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", password: "", role: "employee", companyName: "", companyWebsite: "", companyLogo: null });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -11,9 +18,39 @@ function SignUp() {
     setFormData({ ...formData, companyLogo: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Sign Up Data:", formData);
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("password", formData.password);
+    formDataToSend.append("role", formData.role);
+    if (formData.role === "employee") {
+      formDataToSend.append("profilePhoto", formData.companyLogo);
+    } else {
+      formDataToSend.append("companyName", formData.companyName);
+      formDataToSend.append("companyWebsite", formData.companyWebsite);
+      formDataToSend.append("companyLogo", formData.companyLogo);
+    }
+      
+
+    try {
+      const res = await axios.post(`${USER_API_END_POINT}/register`,formDataToSend,{
+        headers:{'Content-Type':"multipart/form-data"},
+        withCredentials:true,
+      });
+      if (res.data.success) {
+        navigate("/login");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log("sign up error",error);
+      toast.error(error.response.data.message);
+    }finally{
+      dispatchEvent()
+    }
+    
   };
 
   return (
@@ -41,11 +78,14 @@ function SignUp() {
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Password</label>
             <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
-            <div>
+            
+          </div>
+          {formData.role === "employee" && (
+          <div>
                 <label className="block text-gray-600 text-sm">Profile Photo</label>
                 <input type="file" name="Profile" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
               </div>
-          </div>
+          )}
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Role</label>
             <div className="flex gap-4 mt-1">

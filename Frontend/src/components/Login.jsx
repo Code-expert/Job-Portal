@@ -64,7 +64,7 @@ function LoginForm() {
           </div>
           <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Login</button>
         </form>
-        <p className="text-center text-gray-600 text-sm mt-4">Don't have an account? <a href="/signup" className="text-blue-500">Sign Up</a></p>
+        <p className="text-center text-gray-600 text-sm mt-4">Don&apos;t have an account? <a href="/signup" className="text-blue-500">Sign Up</a></p>
       </div>
     </div>
   );

@@ -7,10 +7,10 @@ import  {toast} from "react-toastify"
 function LoginForm() {
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    role:"employee",
-    companyName: ""
+    Email: "",
+    Password: "",
+    Role:"employee",
+  
   });
 
   const navigate = useNavigate();
@@ -51,12 +51,12 @@ function LoginForm() {
            
             <div className="mb-4">
               <label className="block text-gray-600 text-sm">Email Address</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+              <input type="email" name="Email" value={formData.Email} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
             </div>
             
             <div className="mb-4">
               <label className="block text-gray-600 text-sm">Password</label>
-              <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+              <input type="password" name="Password" value={formData.Password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
               
             </div>
            
@@ -64,16 +64,16 @@ function LoginForm() {
               <label className="block text-gray-600 text-sm">Role</label>
               <div className="flex gap-4 mt-1">
                 <label className="flex items-center gap-2">
-                  <input type="radio" name="role" value="employee" checked={formData.role === "employee"} onChange={handleChange} />
+                  <input type="radio" name="Role" value="employee" checked={formData.Role === "employee"} onChange={handleChange} />
                   Employee
                 </label>
                 <label className="flex items-center gap-2">
-                  <input type="radio" name="role" value="recruiter" checked={formData.role === "recruiter"} onChange={handleChange} />
+                  <input type="radio" name="Role" value="recruiter" checked={formData.Role === "recruiter"} onChange={handleChange} />
                   Recruiter
                 </label>
               </div>
             </div>
-            {formData.role === "recruiter" && (
+            {formData.Role === "recruiter" && (
               <div className="space-y-4 mt-4">
                 <div>
                   <label className="block text-gray-600 text-sm">Company Name</label>

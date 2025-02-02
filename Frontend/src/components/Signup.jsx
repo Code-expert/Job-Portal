@@ -65,22 +65,22 @@ function SignUp() {
         <form onSubmit={handleSubmit} className="mt-4">
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Full Name</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="text" name="Fullname" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Email Address</label>
-            <input type="email" name="email" value={formData.Email} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="email" name="Email" value={formData.Email} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Phone Number</label>
-            <input type="tel" name="phone" value={formData.PhoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="tel" name="PhoneNumber" value={formData.PhoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Password</label>
-            <input type="password" name="password" value={formData.Password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="password" name="Password" value={formData.Password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
             
           </div>
-          {formData.role === "employee" && (
+          {formData.Role === "employee" && (
           <div>
                 <label className="block text-gray-600 text-sm">Profile Photo</label>
                 <input type="file" name="file" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
@@ -90,16 +90,16 @@ function SignUp() {
             <label className="block text-gray-600 text-sm">Role</label>
             <div className="flex gap-4 mt-1">
               <label className="flex items-center gap-2">
-                <input type="radio" name="role" value="employee" checked={formData.Role === "employee"} onChange={handleChange} />
+                <input type="radio" name="Role" value="employee" checked={formData.Role === "employee"} onChange={handleChange} />
                 Employee
               </label>
               <label className="flex items-center gap-2">
-                <input type="radio" name="role" value="recruiter" checked={formData.Role === "recruiter"} onChange={handleChange} />
+                <input type="radio" name="Role" value="recruiter" checked={formData.Role === "recruiter"} onChange={handleChange} />
                 Recruiter
               </label>
             </div>
           </div>
-          {formData.role === "recruiter" && (
+          {formData.Role === "recruiter" && (
             <div className="space-y-4 mt-4">
               <div>
                 <label className="block text-gray-600 text-sm">Company Name</label>

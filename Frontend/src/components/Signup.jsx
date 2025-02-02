@@ -3,10 +3,12 @@ import axios from 'axios';
 import USER_API_END_POINT from "../constant.js"
 import {useNavigate}from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 function SignUp() {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", password: "", role: "employee", companyName: "", companyWebsite: "", companyLogo: null });
+  const [formData, setFormData] = useState({ Fullname: "", Email: "", PhoneNumber: "", Password: "", Role: "employee",file:"",
+     companyName: "", companyWebsite: "", companyLogo: null 
+  });
 
   const navigate = useNavigate();
 
@@ -21,17 +23,17 @@ function SignUp() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("phone", formData.phone);
-    formDataToSend.append("password", formData.password);
-    formDataToSend.append("role", formData.role);
-    if (formData.role === "employee") {
-      formDataToSend.append("profilePhoto", formData.companyLogo);
+    formDataToSend.append("Fullname", formData.Fullname);
+    formDataToSend.append("Email", formData.Email);
+    formDataToSend.append("PhoneNumber", formData.PhoneNumber);
+    formDataToSend.append("Password", formData.Password);
+    formDataToSend.append("Role", formData.Role);
+    if (formData.Role === "employee") {
+      formDataToSend.append("file", formData.file);
     } else {
       formDataToSend.append("companyName", formData.companyName);
       formDataToSend.append("companyWebsite", formData.companyWebsite);
-      formDataToSend.append("companyLogo", formData.companyLogo);
+      formDataToSend.append("file", formData.file);
     }
       
 
@@ -47,8 +49,6 @@ function SignUp() {
     } catch (error) {
       console.log("sign up error",error);
       toast.error(error.response.data.message);
-    }finally{
-      dispatchEvent()
     }
     
   };
@@ -69,32 +69,32 @@ function SignUp() {
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Email Address</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="email" name="email" value={formData.Email} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Phone Number</label>
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="tel" name="phone" value={formData.PhoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Password</label>
-            <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+            <input type="password" name="password" value={formData.Password} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
             
           </div>
           {formData.role === "employee" && (
           <div>
                 <label className="block text-gray-600 text-sm">Profile Photo</label>
-                <input type="file" name="Profile" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
+                <input type="file" name="file" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
               </div>
           )}
           <div className="mb-4">
             <label className="block text-gray-600 text-sm">Role</label>
             <div className="flex gap-4 mt-1">
               <label className="flex items-center gap-2">
-                <input type="radio" name="role" value="employee" checked={formData.role === "employee"} onChange={handleChange} />
+                <input type="radio" name="role" value="employee" checked={formData.Role === "employee"} onChange={handleChange} />
                 Employee
               </label>
               <label className="flex items-center gap-2">
-                <input type="radio" name="role" value="recruiter" checked={formData.role === "recruiter"} onChange={handleChange} />
+                <input type="radio" name="role" value="recruiter" checked={formData.Role === "recruiter"} onChange={handleChange} />
                 Recruiter
               </label>
             </div>
@@ -107,11 +107,11 @@ function SignUp() {
               </div>
               <div>
                 <label className="block text-gray-600 text-sm">Company Website</label>
-                <input type="url" name="companyWebsite" value={formData.companyWebsite} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+                <input type="text" name="companyWebsite" value={formData.companyWebsite} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
               </div>
               <div>
                 <label className="block text-gray-600 text-sm">Company Logo</label>
-                <input type="file" name="companyLogo" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
+                <input type="file" name="file" onChange={handleFileChange} className="w-full p-2 border rounded mt-1" accept="image/*" required />
               </div>
             </div>
           )}

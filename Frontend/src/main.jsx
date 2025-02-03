@@ -7,6 +7,8 @@ import Signup from './components/Signup.jsx'
 import Login from './components/Login.jsx'
 import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import {Provider}  from "react-redux"
+import store from "./store/store.js"
 
 
 const appRouter = createBrowserRouter([
@@ -37,7 +39,10 @@ const appRouter = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   
   <StrictMode>
+    <Provider  store={store}>
     <RouterProvider router={appRouter}/>
+
+    </Provider>
    <ToastContainer/>
   </StrictMode>,
 )

@@ -1,40 +1,22 @@
-// JobCard.jsx
-import { Briefcase, Clock, DollarSign } from "lucide-react";
 
-export function JobCard() {
-    return (
-        <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="flex items-start justify-between mb-4">
-                <div>
-                    <h3 className="text-xl font-semibold text-gray-900">Title</h3>
-                    <p className="text-gray-600 mt-1 flex items-center gap-1">
-                        <Briefcase className="w-4 h-4" />
-                        Position
-                    </p>
-                </div>
-                <span className="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">
-                    Type
-                </span>
-            </div>
-
-            <p className="text-gray-600 mb-5 line-clamp-3">
-               description
-            </p>
-
-            <div className="flex flex-wrap gap-4 mb-4">
-                <div className="flex items-center gap-2 text-gray-600">
-                    <DollarSign className="w-5 h-5 text-green-600" />
-                    <span>24 LPA</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                    <Clock className="w-5 h-5 text-purple-600" />
-                    <span>Time</span>
-                </div>
-            </div>
-
-            <button className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                Apply Now
-            </button>
-        </div>
-    );
+function LatestjobCards() {
+  return (
+    <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer">
+    <div>
+        <h1 className="font-medium text-lg">Company Name</h1>
+        <p className="text-gray-500 text-sm">India</p>
+    </div>
+    <div>
+        <h1 className="font-bold text-lg my-2">Job Title</h1>
+        <p className="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div className="flex items-center mt-4 gap-2">
+        <span className=" bg-blue-50 rounded-3xl text-blue-900 font-bold text-sm m-2">12 Positions</span>
+        <span className=" bg-blue-50 rounded-3xl text-red-700 font-bold text-sm m-2">24 LPA</span>
+        <span className=" bg-blue-50 rounded-3xl text-purple-800 font-bold text-sm m-2">Part Time</span>
+    </div>
+    </div>
+  )
 }
+
+export default LatestjobCards

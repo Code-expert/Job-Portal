@@ -9,7 +9,7 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import {Provider}  from "react-redux"
 import store from "./store/store.js"
-
+import Jobs from './pages/Jobs.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -32,6 +32,12 @@ const appRouter = createBrowserRouter([
                     <Signup />
             ),
         },
+        {
+          path: "/jobs",
+          element: (
+                  <Jobs/>
+          ),
+      },
       ],
     }
       ])

@@ -1,6 +1,6 @@
 import HeroSection from "../components/HeroSection"
 import CategoryCarousel from "../components/Carousel"
-import JobListings from "../components/Latestjobs"
+import Latestjobs from "../components/Latestjobs"
 
 function Home() {
   return (
@@ -13,7 +13,7 @@ function Home() {
 
     {/* Job Listings Section */}
     <section className="py-12">
-        <JobListings />
+        <Latestjobs />
     </section>
 </main>
   )

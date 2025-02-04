@@ -59,7 +59,7 @@ function Navbar() {
                   <div className="flex items-center gap-3">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://th.bing.com/th?id=OIP.rv6rEXU2wV2cz2Ls4s9UkAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
                       alt="User"
                     />
                     <div>

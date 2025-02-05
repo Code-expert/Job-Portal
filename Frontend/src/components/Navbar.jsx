@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { ImProfile } from "react-icons/im";
 import { IoIosLogOut } from "react-icons/io";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const user = false; // Change this to true when user is logged in
+  const {user} = useSelector(store => store.auth); // Change this to true when user is logged in
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

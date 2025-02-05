@@ -10,6 +10,8 @@ import { ToastContainer } from 'react-toastify'
 import {Provider}  from "react-redux"
 import store from "./store/store.js"
 import Jobs from './pages/Jobs.jsx'
+import Browse from './pages/Browse.jsx'
+import Profile from './pages/Profile.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -38,6 +40,18 @@ const appRouter = createBrowserRouter([
                   <Jobs/>
           ),
       },
+      {
+        path: "/browse",
+        element: (
+                <Browse/>
+        ),
+    },
+    {
+      path: "/profile",
+      element: (
+              <Profile/>
+      ),
+  },
       ],
     }
       ])

@@ -5,7 +5,7 @@ import  USER_API_END_POINT from "../constant.js";
 import  {toast} from "react-toastify"
 import { useDispatch, useSelector } from "react-redux";
 import { Loader2 } from "lucide-react";
-import { setLoading } from "../store/authSlice.js";
+import { setLoading, setUser } from "../store/authSlice.js";
 
 function LoginForm() {
 
@@ -32,6 +32,7 @@ function LoginForm() {
         withCredentials:true,
       });
       if (res.data.success) {
+        dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
@@ -47,7 +48,7 @@ function LoginForm() {
     if (user) {
       navigate("/");
     }
-  },[])
+  },)
 
   return (
       <div className="flex justify-center items-center min-h-screen bg-gray-900 bg-opacity-50 backdrop-blur-md py-10">

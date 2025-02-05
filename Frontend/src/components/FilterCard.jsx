@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 const filterData = [
     {
@@ -38,7 +38,7 @@ const FilterCard = () => {
             <hr className='mt-3' />
             {filterData.map((data, index) => (
                 <div key={index} className="mt-3">
-                    <h2 className='font-semibold'>{data.filterType}</h2>
+                    <h2 className='font-bold'>{data.filterType}</h2>
                     {data.array.map((item, idx) => {
                         const itemId = `${data.key}-${idx}`;
                         return (
@@ -50,7 +50,7 @@ const FilterCard = () => {
                                     id={itemId}
                                     checked={selectedFilters[data.key] === item}
                                     onChange={(e) => changeHandler(e, data.key)}
-                                    className="cursor-pointer"
+                                    className="cursor-pointer bg-black"
                                 />
                                 <label htmlFor={itemId} className="cursor-pointer">{item}</label>
                             </div>

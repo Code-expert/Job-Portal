@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Pen,Mail, Contact } from 'lucide-react'
 import AppliedJobTable from '../components/AppliedJobTable';
+import UpdateProfileDialogue from '../components/UpdateProfileDialogue';
 
 function Profile() {
     const Skills = ["HTML","CSS","JavaScript","React"];
     const [isOpen, setIsOpen] = useState(false);
+    const [open,setopen] =useState(false);
     const isResume =  true;
 
     const toggleDropdown = () => {
@@ -12,7 +14,7 @@ function Profile() {
     };
     return (
         <div>
-            <div className='max-w-7xl mx-auto my-5 bg-white border-gray-200  p-8 '>
+            <div className='max-w-4xl mx-auto my-5 bg-white border-gray-200  p-8 shadow-xl'>
                 <div className='flex justify-between'>
                     <div className='flex items-center gap-4'>
 
@@ -27,7 +29,7 @@ function Profile() {
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nulla dolorum perspiciatis?</p>
                         </div>
                     </div>
-                    <button className='text-right cursor-pointer'><Pen /></button>
+                    <button onClick={()=>setopen(true)} className='text-right cursor-pointer'><Pen /></button>
                 </div>
                     <div className='my-5'>
                         <div className='flex items-center gap-3 my-2'>
@@ -54,12 +56,13 @@ function Profile() {
                             isResume? <a target='blank' href='https://youtube.com ' className='text-blue-500 hover:underline cursor-pointer'>Harsh</a>:<span>NA</span>
                         }
                     </div>
-                    <div className='max-w-4xl mx-auto bg-white rounded-2xl'>
-                        <h1>Applied Jobs</h1>
-                        <AppliedJobTable/>
-                    </div>
             </div>
-        </div>
+                    <div className='max-w-4xl mx-auto bg-white rounded-2xl'>
+                        <h1 className='font-bold text-lg '>Applied Jobs</h1>
+                          <AppliedJobTable/>
+                    </div>
+                    <UpdateProfileDialogue />
+        </div>  
     )
 }
 

@@ -1,5 +1,6 @@
 import { Bookmark } from 'lucide-react'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Job() {
 const [isOpen, setIsOpen] = useState(false);
@@ -7,7 +8,8 @@ const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+ 
+  const JobId = "123345owfn";
 
   return (
     <div className='p-5 rounded-md shadow-xl bg-white border border-gray-100'>
@@ -39,7 +41,7 @@ const [isOpen, setIsOpen] = useState(false);
         <span className=" bg-blue-50 rounded-3xl text-purple-800 font-bold text-sm m-2">Part Time</span>
     </div>
     <div className="flex gap-4 mt-4">
-             <button className="text-black px-4 py-2 rounded font-medium">Details</button> 
+             <button  className="text-black px-4 py-2 rounded font-medium"><Link to={`/jobs/description/:${JobId}`}>Details</Link></button> 
              <button className="bg-purple-800 text-white px-4 py-2 rounded hover:bg-purple-300">Save For Later</button>
             </div>
     </div>

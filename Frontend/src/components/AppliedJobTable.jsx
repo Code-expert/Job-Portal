@@ -6,10 +6,10 @@ const AppliedJobTable = () => {
     ]; // Replace this with actual data
 
     return (
-        <div className="p-4 overflow-x-auto">
-            <h2 className="text-lg font-semibold mb-2">A list of your applied jobs</h2>
+        <div className="p-5 overflow-x-auto">
+            
             {jobs.length === 0 ? (
-                <p className="text-gray-600">You haven't applied for any job yet.</p>
+                <p className="text-gray-600">You haven&apos;t applied for any job yet.</p>
             ) : (
                 <table className="w-full border-collapse border border-gray-300">
                     <thead>

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import USER_API_END_POINT from "../constant.js"
-import {useNavigate}from "react-router-dom";
-
+import {useNavigate} from "react-router-dom";
 import {  toast } from 'react-toastify';
 
 function SignUp() {

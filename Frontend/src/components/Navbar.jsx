@@ -1,8 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
 import { ImProfile } from "react-icons/im";
 import { IoIosLogOut } from "react-icons/io";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import USER_API_END_POINT from "../constant";
+import { setUser } from "../store/authSlice";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +15,23 @@ function Navbar() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+   
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+ const logoutHandler = async ()=>{
+  try {
+    const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true});
+    if (res.data.success) {
+      dispatch(setUser(null))
+      navigate("/");
+      toast.success(res.data.message)
+    }
+  } catch (error) {
+    console.log(error)
+    toast.error(error.reponse.data.message)
+  }
+ }
 
   return (
     <div className="">
@@ -76,7 +97,7 @@ function Navbar() {
                     <ImProfile className="text-lg" /> View Profile
                   </Link>
 
-                  <button className="w-full flex items-center gap-2 text-left px-3 py-2 text-red-500 hover:bg-red-100 rounded">
+                  <button className="w-full flex items-center gap-2 text-left px-3 py-2 text-red-500 hover:bg-red-100 rounded" onClick={logoutHandler}>
                     <IoIosLogOut className="text-lg" /> Logout
                   </button>
                 </div>

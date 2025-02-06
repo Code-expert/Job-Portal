@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Pen, Mail, Contact } from "lucide-react";
 import AppliedJobTable from "../components/AppliedJobTable";
 import UpdateProfileDialogue from "../components/UpdateProfileDialogue";
+import { useSelector } from "react-redux";
 
 function Profile() {
-  const Skills = ["HTML", "CSS", "JavaScript", "React"];
+  const {user} = useSelector(store=>store.auth);
+ 
   const [open, setOpen] = useState(false); // Controls the update form visibility
   const isResume = true;
 
@@ -19,8 +21,8 @@ function Profile() {
               alt="Profile"
             />
             <div>
-              <h1 className="font-medium text-xl">Full Name</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <h1 className="font-medium text-xl">{user?.Fullname}</h1>
+              <p>{user?.Profile?.bio}</p>
             </div>
           </div>
           {/* Open Update Profile Form on Click */}
@@ -32,19 +34,19 @@ function Profile() {
         <div className="my-5">
           <div className="flex items-center gap-3 my-2">
             <Mail />
-            <span>Harshraj@gmail.com</span>
+            <span>{user?.Email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <Contact />
-            <span>1234567890</span>
+            <span>{user?.PhoneNumber}</span>
           </div>
         </div>
 
         <div>
           <h1 className="font-bold">Skills</h1>
           <div className="flex items-center gap-1">
-            {Skills.length !== 0 ? (
-              Skills.map((item, index) => (
+            {user?.Profile?.skills.length !== 0 ? (
+              user?.Profile?.skills.map((item, index) => (
                 <span key={index} className="bg-black rounded-3xl text-white font-semibold text-sm m-2 p-2">
                   {item}
                 </span>
@@ -73,7 +75,8 @@ function Profile() {
       </div>
 
       {/* Update Profile Modal - Controlled by "open" state */}
-      <UpdateProfileDialogue open={open} onClose={() => setOpen(false)} />
+      <UpdateProfileDialogue open={open} setOpen={setOpen} />
+          
     </div>
   );
 }

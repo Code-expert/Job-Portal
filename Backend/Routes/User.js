@@ -11,6 +11,6 @@ Router.route('/login')
 Router.route('/logout')
       .get(logout)
 Router.route('/profile/update')
-      .post(isAuthenticated,updateProfile)      
+      .post(isAuthenticated,singleUpload,updateProfile)      
 
 export default Router;

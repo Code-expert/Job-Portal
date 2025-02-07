@@ -10,8 +10,7 @@ import { setUser } from "../store/authSlice";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const {user} = useSelector(store => store.auth); // Change this to true when user is logged in
-
+  const {user} = useSelector(store => store.auth); 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -61,7 +60,7 @@ function Navbar() {
           {!user ? (
             <div className="flex gap-4">
               <Link to="/login" className="text-black px-4 py-2 rounded font-medium">Login</Link>
-              <Link to="/signup" className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-300">Register</Link>
+              <Link to="/signup" className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-300">Register</Link>
             </div>
           ) : (
             // If user is logged in, show profile section
@@ -69,7 +68,7 @@ function Navbar() {
               {/* Profile Image */}
               <img
                 className="size-10 rounded-full ring-2 ring-white cursor-pointer"
-                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src={user?.Profile?.ProfilePhoto} 
                 alt="Profile"
                 onClick={toggleDropdown} // Toggle dropdown on click
               />
@@ -81,12 +80,12 @@ function Navbar() {
                   <div className="flex items-center gap-3">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={user?.Profile?.ProfilePhoto} 
                       alt="User"
                     />
                     <div>
-                      <p className="text-gray-700 font-medium">John Doe</p>
-                      <p className="text-sm text-gray-500">johndoe@email.com</p>
+                      <p className="text-gray-700 font-medium">{user?.Fullname}</p>
+                      <p className="text-sm text-gray-500">{user?.Email}</p>
                     </div>
                   </div>
 

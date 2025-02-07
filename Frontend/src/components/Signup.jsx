@@ -3,12 +3,15 @@ import axios from 'axios';
 import USER_API_END_POINT from "../constant.js"
 import {useNavigate} from "react-router-dom";
 import {  toast } from 'react-toastify';
+import { Loader2 } from "lucide-react";
+import { useSelector } from "react-redux";
+
 
 function SignUp() {
   const [formData, setFormData] = useState({ Fullname: "", Email: "", PhoneNumber: "", Password: "", Role: "employee",file:"",
      companyName: "", companyWebsite: "", companyLogo: null 
   });
-
+  const {loading} = useSelector(store => store.auth);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -114,8 +117,9 @@ function SignUp() {
               </div>
             </div>
           )}
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Sign Up</button>
-        </form>
+ {
+              loading? <button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</button>:<button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Sign up</button>
+            }        </form>
         <p className="text-center text-gray-600 text-sm mt-4">Already have an account? <a href="/login" className="text-blue-500">Login</a></p>
       </div>
     </div>

@@ -12,7 +12,7 @@ function JobDescription() {
                 <span className=" bg-blue-50 rounded-3xl text-purple-800 font-bold text-sm m-2">Part Time</span>
                 </div>
             </div>
-            <button disabled={isApplied} className={`rounded-lg p-2 ${isApplied? 'bg-gray-600 cursor-not-allowed':'bg-purple-800 hover:bg-purple-900'}`}>{isApplied?'Already Applied ':'Apply Now'}</button>
+            <button disabled={isApplied} className={`rounded-lg p-2 text-white ${isApplied? 'bg-gray-600 cursor-not-allowed':'bg-purple-700 hover:bg-purple-8   00'}`}>{isApplied?'Already Applied ':'Apply Now'}</button>
         </div>
         <h1 className='border-b-2 border-b-gray-300 font-medium py-4'>Job Description</h1>
             <div className='my-4'>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import USER_API_END_POINT from '../constant.js';
-import { setUser } from '../store/authSlice';
+import { setUser } from '../store/authSlice.js';
 import { toast } from 'react-toastify';
 import { Loader2 } from 'lucide-react';
 

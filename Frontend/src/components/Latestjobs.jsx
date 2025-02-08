@@ -15,6 +15,6 @@ function Latestjobs() {
         </div>
     </div>
   )
-}
+} 
 
 export default Latestjobs

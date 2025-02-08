@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pen, Mail, Contact } from "lucide-react";
-import AppliedJobTable from "../components/AppliedJobTable";
-import UpdateProfileDialogue from "../components/UpdateProfileDialogue";
+import AppliedJobTable from "../components/AppliedJobTable.jsx";
+import UpdateProfileDialogue from "../components/UpdateProfileDialogue.jsx";
 import { useSelector } from "react-redux";
 
 function Profile() {
@@ -18,7 +18,7 @@ function Profile() {
           <div className="flex items-center gap-4">
             <img
               className="size-10 ring-2 rounded-full ring-white cursor-pointer h-24 w-24"
-              src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/100"}
+              src={user?.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}
               alt="Profile"
               />
             <div>

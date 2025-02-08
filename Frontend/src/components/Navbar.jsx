@@ -10,34 +10,34 @@ import { setUser } from "../store/authSlice";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const {user} = useSelector(store => store.auth); 
+  const { user } = useSelector(store => store.auth);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-   
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
- const logoutHandler = async ()=>{
-  try {
-    const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true});
-    if (res.data.success) {
-      dispatch(setUser(null))
-      navigate("/");
-      toast.success(res.data.message)
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+      if (res.data.success) {
+        dispatch(setUser(null))
+        navigate("/");
+        toast.success(res.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.reponse.data.message)
     }
-  } catch (error) {
-    console.log(error)
-    toast.error(error.reponse.data.message)
   }
- }
 
   return (
     <div className="">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-4">
         {/* Logo */}
         <div>
-          <h1 className="text-2xl font-bold cursor-pointer"> 
+          <h1 className="text-2xl font-bold cursor-pointer">
             <Link to="/">Job<span className="text-red-500">Portal</span></Link>
           </h1>
         </div>
@@ -45,15 +45,32 @@ function Navbar() {
         {/* Navigation Links */}
         <div className="flex items-center gap-8">
           <ul className="flex font-medium items-center gap-6">
-            <li className="cursor-pointer hover:text-gray-300">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="cursor-pointer hover:text-gray-300">
-              <Link to="/jobs">Jobs</Link>
-            </li>
-            <li className="cursor-pointer hover:text-gray-300">
-              <Link to="/browse">Browse</Link>
-            </li>
+            {
+              user && user.Role === "recruiter" ? (
+                <>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <Link to="/admin/companies">Companies</Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <Link to="/admin/jobs">Jobs</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <Link to="/jobs">Jobs</Link>
+                  </li>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <Link to="/browse">Browse</Link>
+                  </li>
+
+                </>
+              )
+            }
+
           </ul>
 
           {/* If user is NOT logged in, show Login & Register buttons */}
@@ -68,7 +85,7 @@ function Navbar() {
               {/* Profile Image */}
               <img
                 className="size-10 rounded-full ring-2 ring-white cursor-pointer"
-                src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/100"}
+                src={user?.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}
                 alt="Profile"
                 onClick={toggleDropdown} // Toggle dropdown on click
               />
@@ -80,7 +97,7 @@ function Navbar() {
                   <div className="flex items-center gap-3">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/100"}
+                      src={user?.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}
                       alt="User"
                     />
                     <div>
@@ -92,10 +109,14 @@ function Navbar() {
                   <hr className="my-2" />
 
                   {/* Profile & Logout Buttons */}
-                  <Link to="/profile" className="w-full flex items-center gap-2 text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
-                    <ImProfile className="text-lg" /> View Profile
-                  </Link>
-
+                  {
+                    user && user.Role === "employee" && (
+                      <Link to="/profile" className="w-full flex items-center gap-2 text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      <ImProfile className="text-lg" /> View Profile
+                    </Link>
+                    )
+                  }
+                  
                   <button className="w-full flex items-center gap-2 text-left px-3 py-2 text-red-500 hover:bg-red-100 rounded" onClick={logoutHandler}>
                     <IoIosLogOut className="text-lg" /> Logout
                   </button>

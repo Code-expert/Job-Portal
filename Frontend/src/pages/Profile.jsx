@@ -10,6 +10,7 @@ function Profile() {
   const [open, setOpen] = useState(false); // Controls the update form visibility
   const isResume = true;
 
+  console.log("Profile Photo URL:", user?.Profile?.ProfilePhoto)
   return (
     <div>
       <div className="max-w-4xl mx-auto my-5 bg-white border-gray-200 p-8 shadow-xl">
@@ -17,14 +18,15 @@ function Profile() {
           <div className="flex items-center gap-4">
             <img
               className="size-10 ring-2 rounded-full ring-white cursor-pointer h-24 w-24"
-              src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/100"}
               alt="Profile"
-            />
+              />
             <div>
               <h1 className="font-medium text-xl">{user?.Fullname}</h1>
               <p>{user?.Profile?.bio}</p>
             </div>
           </div>
+
           {/* Open Update Profile Form on Click */}
           <button onClick={() => setOpen(true)} className="text-right cursor-pointer">
             <Pen />
@@ -77,7 +79,7 @@ function Profile() {
       {/* Update Profile Modal - Controlled by "open" state */}
       <UpdateProfileDialogue open={open} setOpen={setOpen} />
           
-    </div>
+      </div>
   );
 }
 

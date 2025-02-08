@@ -19,7 +19,11 @@ function SignUp() {
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, companyLogo: e.target.files[0] });
+    if (formData.Role === "employee") {
+      setFormData({ ...formData, ProfilePhoto: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, companyLogo: e.target.files[0] });
+    }
   };
 
   const handleSubmit = async(e) => {
@@ -31,13 +35,13 @@ function SignUp() {
     formDataToSend.append("Password", formData.Password);
     formDataToSend.append("Role", formData.Role);
     if (formData.Role === "employee") {
-      formDataToSend.append("file", formData.file);
+      formDataToSend.append("file", formData.ProfilePhoto);
     } else {
       formDataToSend.append("companyName", formData.companyName);
       formDataToSend.append("companyWebsite", formData.companyWebsite);
-      formDataToSend.append("file", formData.file);
+      formDataToSend.append("file", formData.companyLogo);
     }
-      
+    console.log("FormData:", formData); // Debugging
 
     try {
       const res = await axios.post(`${USER_API_END_POINT}/register`,formDataToSend,{
@@ -119,7 +123,8 @@ function SignUp() {
           )}
  {
               loading? <button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</button>:<button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Sign up</button>
-            }        </form>
+            }       
+             </form>
         <p className="text-center text-gray-600 text-sm mt-4">Already have an account? <a href="/login" className="text-blue-500">Login</a></p>
       </div>
     </div>

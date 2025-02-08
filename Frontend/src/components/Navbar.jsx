@@ -68,7 +68,7 @@ function Navbar() {
               {/* Profile Image */}
               <img
                 className="size-10 rounded-full ring-2 ring-white cursor-pointer"
-                src={user?.Profile?.ProfilePhoto} 
+                src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/100"}
                 alt="Profile"
                 onClick={toggleDropdown} // Toggle dropdown on click
               />
@@ -80,7 +80,7 @@ function Navbar() {
                   <div className="flex items-center gap-3">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src={user?.Profile?.ProfilePhoto} 
+                      src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/100"}
                       alt="User"
                     />
                     <div>

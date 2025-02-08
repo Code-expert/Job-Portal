@@ -42,7 +42,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         if (input.file) {
             formData.append("file", input.file);
         }
-
+        console.log("FormData:", formData); // Debugging
         try {
             setLoading(true);
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {

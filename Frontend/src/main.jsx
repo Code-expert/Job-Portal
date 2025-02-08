@@ -13,6 +13,10 @@ import Jobs from './pages/Jobs.jsx'
 import Browse from './pages/Browse.jsx'
 import Profile from './pages/Profile.jsx'
 import JobDescription from './pages/JobDescription.jsx'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+
+const persistor = persistStore(store);
 
 const appRouter = createBrowserRouter([
   {
@@ -67,7 +71,9 @@ createRoot(document.getElementById('root')).render(
   
   <StrictMode>
     <Provider  store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <RouterProvider router={appRouter}/>
+    </PersistGate>
 
     </Provider>
    <ToastContainer/>

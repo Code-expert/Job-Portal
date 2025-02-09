@@ -5,12 +5,14 @@ import { COMPANY_API_END_POINT } from "../../constant";
 import { useNavigate, useParams } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function CompanySetup() {
-    const params =  useParams();
-    const navigate = useNavigate();
-    // const dispatch = useDispatch();
-    const  [loading, setLoading] = useState(false);
+  const   {singleCompany} = useSelector(store => store.auth);
+  const params = useParams();
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState({
     companyName: "",
     description: "",
@@ -22,44 +24,47 @@ function CompanySetup() {
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("companyName",input.companyName);
-    formData.append("description",input.description);
-    formData.append("website",input.website);
-    formData.append("location",input.location);
+    formData.append("companyName", input.companyName);
+    formData.append("description", input.description);
+    formData.append("website", input.website);
+    formData.append("location", input.location);
 
     if (input.file) {
-        formData.append("file",input.file);
+      formData.append("file", input.file);
     }
     try {
-        setLoading(true);
-        const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`,formData,{
-            headers:{
-                'Content-Type':'multipart/form-data'
-            },
-            withCredentials:true
-        });
-        if (res.data.success) {
-            toast.success(res.data.message);
-            navigate("/admin/companies");
-        }
+      setLoading(true);
+      const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        withCredentials: true
+      });
+      if (res.data.success) {
+        toast.success(res.data.message);
+        navigate("/admin/companies");
+      }
     } catch (error) {
-        console.log(error)
-        toast.error(error.response.data.message);
+      console.log(error)
+      toast.error(error.response.data.message);
     }
-    finally{
-        setLoading(false);
+    finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    setInput({
-      companyName: "Company Name",
-      description: "Description",
-      website: "Website",
-      location: "Location",
-      logo: null,
-    });
-  });
+    if (singleCompany) {  // ✅ Only update state if singleCompany exists
+      setInput({
+        companyName: singleCompany.companyName || "",
+        description: singleCompany.description || "",
+        website: singleCompany.website || "",
+        location: singleCompany.location || "",
+        file: singleCompany.file || null,
+      });
+    }
+  }, [singleCompany]);
+  
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -74,7 +79,7 @@ function CompanySetup() {
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
-      <button onClick={()=>navigate("/admin/companies")} className="flex items-center gap-2 text-gray-600 font-semibold mb-4 cursor-pointer">
+      <button onClick={() => navigate("/admin/companies")} className="flex items-center gap-2 text-gray-600 font-semibold mb-4 cursor-pointer">
         <ArrowLeft size={20} />
         <span>Back</span>
       </button>
@@ -136,8 +141,8 @@ function CompanySetup() {
         </div>
 
         {
-              loading? <button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</button>:<button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Update</button>
-            }    
+          loading ? <button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</button> : <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Update</button>
+        }
       </form>
     </div>
   );

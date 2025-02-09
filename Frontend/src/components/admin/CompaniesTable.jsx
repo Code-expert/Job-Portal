@@ -1,28 +1,8 @@
-import  { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import  { useState } from "react";
 import { Edit2, MoreHorizontal } from "lucide-react";
 
 const CompaniesTable = () => {
-  const { companies, searchCompanyByText } = useSelector(
-    (store) => store.company
-  );
-  const [filterCompany, setFilterCompany] = useState(companies);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const filteredCompany =
-      companies.length >= 0 &&
-      companies.filter((company) => {
-        if (!searchCompanyByText) {
-          return true;
-        }
-        return company?.name
-          ?.toLowerCase()
-          .includes(searchCompanyByText.toLowerCase());
-      });
-    setFilterCompany(filteredCompany);
-  }, [companies, searchCompanyByText]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
@@ -39,35 +19,36 @@ const CompaniesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {filterCompany?.map((company) => (
-            <tr key={company._id} className="border-b hover:bg-gray-50">
-              <td className="p-2">
-                <img
-                  src={company.logo}
-                  alt="Company Logo"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              </td>
-              <td className="p-2">{company.name}</td>
-              <td className="p-2">{company.createdAt.split("T")[0]}</td>
-              <td className="p-2 text-right relative">
-                <div className="group inline-block">
-                  <MoreHorizontal className="cursor-pointer" />
-                  <div className="hidden group-hover:block absolute right-0 mt-2 w-24 bg-white border shadow-md rounded-md">
-                    <div
-                      onClick={() =>
-                        navigate(`/admin/companies/${company._id}`)
-                      }
-                      className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <Edit2 className="w-4" />
-                      <span>Edit</span>
-                    </div>
-                  </div>
+          <tr className="border-b hover:bg-gray-50">
+            <td className="p-2">
+              <img
+                src="https://via.placeholder.com/40"
+                alt="Company Logo"
+                className="w-10 h-10 rounded-full object-cover"
+              />
+            </td>
+            <td className="p-2">Company Name</td>
+            <td className="p-2">18-07-2024</td>
+            <td className="p-2 text-right relative">
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="cursor-pointer"
+              >
+                <MoreHorizontal />
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-24 bg-white border shadow-md rounded-md">
+                  <button
+                    className="flex items-center gap-2 p-2 w-full hover:bg-gray-100 cursor-pointer"
+                    onClick={() => alert("Edit clicked!")}
+                  >
+                    <Edit2 className="w-4" />
+                    <span>Edit</span>
+                  </button>
                 </div>
-              </td>
-            </tr>
-          ))}
+              )}
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

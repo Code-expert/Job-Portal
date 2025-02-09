@@ -1,4 +1,5 @@
 import CompaniesTable from "../../components/admin/CompaniesTable"
+import { Link } from "react-router-dom"
 
 function Companies() {
   return (
@@ -8,7 +9,7 @@ function Companies() {
         className="w-fit p-3 shadow-2xl bg-gray-200 rounded-2xl"
         placeholder="Search for Companies"
         />
-        <button className="bg-gray-800 text-white p-3 rounded-xl">New Company</button>
+        <button className="bg-gray-800 text-white p-3 rounded-xl"><Link to="/admin/companies/create">New Company</Link></button>
       </div>
       <CompaniesTable />
     </div>

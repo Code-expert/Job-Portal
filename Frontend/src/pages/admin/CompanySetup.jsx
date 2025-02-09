@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { COMPANY_API_END_POINT } from "../../constant";
 import { useNavigate, useParams } from "react-router-dom";
 // import { useDispatch } from "react-redux";
@@ -51,6 +51,16 @@ function CompanySetup() {
     }
   };
 
+  useEffect(() => {
+    setInput({
+      companyName: "Company Name",
+      description: "Description",
+      website: "Website",
+      location: "Location",
+      logo: null,
+    });
+  });
+
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -59,6 +69,8 @@ function CompanySetup() {
     const file = e.target.files?.[0];
     setInput({ ...input, file });
   };
+
+
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">

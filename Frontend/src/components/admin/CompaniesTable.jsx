@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Edit2, MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 
-
 const CompaniesTable = () => {
   const navigate = useNavigate();
   const { companies, searchCompaniesByText } = useSelector(store => store.company);
@@ -20,11 +19,10 @@ const CompaniesTable = () => {
       setFilterCompany(filteredCompany);
   },[companies,searchCompaniesByText])
 
-  // State to track which company's dropdown is open
   const [dropdownOpenId, setDropdownOpenId] = useState(null);
 
   const toggleDropdown = (companyId) => {
-    setDropdownOpenId((prev) => (prev === companyId ? null : companyId)); // Toggle based on company ID
+    setDropdownOpenId((prev) => (prev === companyId ? null : companyId)); 
   };
 
   return (
@@ -62,7 +60,6 @@ const CompaniesTable = () => {
                     <MoreHorizontal />
                   </button>
 
-                  {/* Show dropdown only for the selected company */}
                   {dropdownOpenId === company._id && (
                     <div className="absolute right-0 mt-2 w-24 bg-white border shadow-md rounded-md">
                       <button

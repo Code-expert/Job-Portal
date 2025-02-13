@@ -11,6 +11,7 @@ const useGetCompaniesById = (companyId)=>{
     const fetchCompanyById = async () => {
       try {
         const res = await axios.get(`${COMPANY_API_END_POINT}/get/${companyId}`,{withCredentials:true}  )
+        console.log(res.data.company)
         if (res.data.success) {
           dispatch(setsingleCompany(res.data.company));
 
@@ -20,6 +21,6 @@ const useGetCompaniesById = (companyId)=>{
       }
     }
     fetchCompanyById();
-  },[companyId,dispatch])
+  },[companyId,dispatch]);
 }
 export default useGetCompaniesById;

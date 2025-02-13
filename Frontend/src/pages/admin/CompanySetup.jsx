@@ -6,10 +6,12 @@ import { useNavigate, useParams } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import useGetCompaniesById from "../../hooks/UseGetCompaniesById";
 
 function CompanySetup() {
-  const   {singleCompany} = useSelector(store => store.auth);
   const params = useParams();
+  useGetCompaniesById(params.id)
+  const   {singleCompany} = useSelector(store => store.auth);
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);

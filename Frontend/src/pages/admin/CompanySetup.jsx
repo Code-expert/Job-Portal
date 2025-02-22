@@ -11,7 +11,7 @@ import useGetCompaniesById from "../../hooks/UseGetCompaniesById";
 function CompanySetup() {
   const params = useParams();
   useGetCompaniesById(params.id)
-  const   {singleCompany} = useSelector(store => store.auth);
+  const   {singleCompany} = useSelector(store => store.company);
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -143,7 +143,7 @@ function CompanySetup() {
         </div>
 
         {
-          loading ? <button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</button> : <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4">Update</button>
+          loading ? <button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</button> : <button type="submit" className="w-full bg-purple-700 text-white py-2 rounded hover:bg-purple-800 mt-4">Update</button>
         }
       </form>
     </div>

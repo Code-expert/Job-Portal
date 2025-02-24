@@ -37,12 +37,12 @@ const CompaniesTable = () => {
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
-      <table className="w-full border-collapse">
+      <table className="w-full ">
         <caption className="text-gray-600 my-2">
           A list of your recent registered companies
         </caption>
         <thead>
-          <tr className="bg-gray-100 border-b">
+          <tr className="bg-white ">
             <th className="p-2 text-left">Logo</th>
             <th className="p-2 text-left">Name</th>
             <th className="p-2 text-left">Date</th>
@@ -51,7 +51,7 @@ const CompaniesTable = () => {
         </thead>
         <tbody>
           {filterCompany?.map((company) => (
-            <tr key={company._id} className="border-b hover:bg-gray-50">
+            <tr key={company._id} className="border-0 hover:bg-gray-50">
               <td className="p-2">
                 <img
                   src={company.logo || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}

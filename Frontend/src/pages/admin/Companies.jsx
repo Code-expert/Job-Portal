@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setSearchCompaniesByText } from "../../store/companySlice";
 
 function Companies() {
+  useGetAllCompanies(); 
   const [input, setInput] = useState("");
 
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ function Companies() {
     dispatch(setSearchCompaniesByText(input));
   }, [input]);
 
-  useGetAllCompanies(); 
   return (
     <div className="max-w-6xl mx-auto my-10">
       <div className="flex justify-between items-center">

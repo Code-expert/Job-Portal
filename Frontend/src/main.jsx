@@ -18,6 +18,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Companies from './pages/admin/Companies.jsx'
 import CompanyCreate from './pages/admin/CompanyCreate.jsx'
 import CompanySetup from './pages/admin/CompanySetup.jsx'
+import AdminJob from './pages/admin/AdminJob.jsx'
 
 const persistor = persistStore(store);
 
@@ -82,6 +83,12 @@ const appRouter = createBrowserRouter([
         path: "/admin/companies/:id",
         element: (
           <CompanySetup />
+        ),
+      },
+      {
+        path: "/admin/jobs",
+        element: (
+          <AdminJob />
         ),
       },
     ],

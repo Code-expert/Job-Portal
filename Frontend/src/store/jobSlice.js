@@ -5,8 +5,8 @@ const jobSlice = createSlice({
     initialState:{
         GetAllJobs:[],
         GetAdminJobs:[],
-        searchjobsByText:"",
         SingleJob:null,
+        searchjobsByText:"",
     },
     reducers:{
         setGetAllJobs:(state,action) =>{

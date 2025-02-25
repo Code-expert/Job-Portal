@@ -9,7 +9,7 @@ const AdminJobTable = () => {
   const { GetAdminJobs } = useSelector(store => store.job);
   const [filterjob, setFilterjob] = useState(GetAdminJobs);
   const [dropdownOpenId, setDropdownOpenId] = useState(null);
-  const dropdownRefs = useRef({}); // ✅ Store refs for multiple dropdowns
+  const dropdownRefs = useRef({}); 
 
   useEffect(() => {
     if (!Array.isArray(GetAdminJobs)) return;
@@ -57,14 +57,9 @@ const AdminJobTable = () => {
         <tbody>
           {filterjob?.map((job) => (
             <tr key={job._id} className="border-0 hover:bg-gray-50">
-              <td className="p-2">
-                <img
-                  src={job.logo || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}
-                  alt="Company Logo"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              </td>
+              
               <td className="p-2">{job?.company?.companyName}</td>
+              <td className="p-2">{job?.Role}</td>
               <td className="p-2">{job?.createdAt.split("T")[0]}</td>
               <td className="p-2 text-right relative">
                 <button onClick={() => toggleDropdown(job._id)} className="cursor-pointer">

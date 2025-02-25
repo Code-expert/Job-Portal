@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AdminJobTable from "../../components/admin/AdminJobTable";
 import { setSearchJobsByText } from "../../store/jobSlice";
+import UseGetAllAdminJobs from "../../hooks/UseGetAllAdminJobs";
 
 function AdminJob() {
+  UseGetAllAdminJobs();
   const [input, setInput] = useState("");
 
   const dispatch = useDispatch();

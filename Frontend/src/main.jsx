@@ -19,6 +19,8 @@ import Companies from './pages/admin/Companies.jsx'
 import CompanyCreate from './pages/admin/CompanyCreate.jsx'
 import CompanySetup from './pages/admin/CompanySetup.jsx'
 import AdminJob from './pages/admin/AdminJob.jsx'
+import PostJob from './pages/admin/PostJob.jsx'
+import Applicants from './pages/admin/Applicants.jsx'
 
 const persistor = persistStore(store);
 
@@ -89,6 +91,18 @@ const appRouter = createBrowserRouter([
         path: "/admin/jobs",
         element: (
           <AdminJob />
+        ),
+      },
+      {
+        path: "/admin/job/create",
+        element: (
+          <PostJob />
+        ),
+      },
+      {
+        path: "/admin/job/:id/applicants",
+        element: (
+          <Applicants />
         ),
       },
     ],

@@ -80,7 +80,7 @@ function CompanySetup() {
 
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+    <div className="max-w-xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
       <button onClick={() => navigate("/admin/companies")} className="flex items-center gap-2 text-gray-600 font-semibold mb-4 cursor-pointer">
         <ArrowLeft size={20} />
         <span>Back</span>

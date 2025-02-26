@@ -20,10 +20,10 @@ function AdminJob() {
       <div className="flex justify-between items-center">
         <input
         className="w-fit p-2 shadow-2xl bg-gray-200 rounded-2xl"
-        placeholder="Search for Companies"
+        placeholder="Search by name,Role"
         onChange={(e) => setInput(e.target.value)}
         />
-        <button className="bg-gray-800 text-white p-2 rounded-xl"><Link to="/admin/companies/create">New Job</Link></button>
+        <button className="bg-gray-800 text-white p-2 rounded-xl"><Link to="/admin/job/create">New Job</Link></button>
       </div>
       <AdminJobTable />
     </div>

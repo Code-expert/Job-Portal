@@ -19,6 +19,6 @@ const UseGetAllAdminJobs = ()=>{
       }
     }
     fetchAllAdminJob();
-  },[])
+  })
 }
 export default UseGetAllAdminJobs;

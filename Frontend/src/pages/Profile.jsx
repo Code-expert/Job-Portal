@@ -5,12 +5,13 @@ import UpdateProfileDialogue from "../components/UpdateProfileDialogue.jsx";
 import { useSelector } from "react-redux";
 import useGetAppliedJobs from "../hooks/UseGetAppliedJobs.jsx";
 
+const isResume = true;
 function Profile() {
   useGetAppliedJobs(); // Fetches the applied jobs
-  const {user} = useSelector(store=>store.auth);
- 
   const [open, setOpen] = useState(false); // Controls the update form visibility
-  const isResume = true;
+  const {user} = useSelector(store=>store.auth);
+  console.log("🟢 Redux User Data:", user);
+
 
   console.log("Profile Photo URL:", user?.Profile?.ProfilePhoto)
   return (

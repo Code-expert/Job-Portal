@@ -45,7 +45,7 @@ export const applyJobs = async (req,res) => {
 export const getAppliedJobs = async (req,res) => {
     try {
         const userId = req.id;
-        const applications = await Application.find({Applicant:userId}).sort("-createdAt").populate({
+        const application = await Application.find({Applicant:userId}).sort({createdAt:-1}).populate({
             path:"job",
             options:{sort:{createdAt:-1}},
             populate:{
@@ -53,7 +53,7 @@ export const getAppliedJobs = async (req,res) => {
                 options:{sort:{createdAt:-1}},
             }
         });
-        if (!applications) {
+        if (!application) {
             return res.status(400).json({
                 message:"No job found",
                 success:false
@@ -62,7 +62,7 @@ export const getAppliedJobs = async (req,res) => {
 
         return res.status(200).json({
             message:"Applied jobs fetched successfully",
-            applications,
+            application,
             success:true,
         })
 

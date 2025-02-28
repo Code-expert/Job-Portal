@@ -1,19 +1,21 @@
 // import React, { useState } from 'react'
 
 import { Search } from 'lucide-react'
-// import { useDispatch } from 'react-redux';
-// // import { setSearchedQuery } from '@/redux/jobSlice';
-// import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setsearchQuery } from '../store/jobSlice';
+
 
 const HeroSection = () => {
-    // const [query, setQuery] = useState("");
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-
-    // const searchJobHandler = () => {
-    //     dispatch(setSearchedQuery(query));
-    //     navigate("/browse");
-    // }
+    const [query, setQuery] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const jobSearchHandler = () => {    
+        dispatch(setsearchQuery(query));
+        navigate("/browse");
+    }
+   
 
     return (
         <div className='text-center'>
@@ -25,11 +27,11 @@ const HeroSection = () => {
                     <input
                         type="text"
                         placeholder='Find your dream jobs'
-                        // onChange={(e) => setQuery(e.target.value)}
+                        onChange={(e) => setQuery(e.target.value)}
                         className='outline-none border-none w-full '
 
                     />
-                    <button  className="rounded-r-full bg-[#6A38C2] p-4">
+                    <button onClick={jobSearchHandler} className="rounded-r-full bg-[#6A38C2] p-4 cursor-pointer">
                         <Search className='h-5 w-5'  />
                     </button>
                 </div>

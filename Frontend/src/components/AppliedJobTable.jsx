@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const AppliedJobTable = () => {
@@ -6,12 +5,7 @@ const AppliedJobTable = () => {
     const allAppliedJobs = useSelector(store => store.job.allAppliedJobs || []);
 
     // Debugging logs
-    console.log("🟢 Rendered Applied Jobs:", allAppliedJobs);
-    
-    useEffect(() => {
-        console.log("🟢 Component Rendered with Data:", allAppliedJobs);
-    }, [allAppliedJobs]);
-
+   
     return (
         <div className="p-5 overflow-x-auto">
             <table className="w-full border-collapse border border-gray-300">

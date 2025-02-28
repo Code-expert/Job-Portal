@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 
+import { useNavigate } from "react-router-dom";
+
 
 function LatestjobCards({job}) {
+  const navigate = useNavigate();
   return (
-    <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer">
+    <div onClick={()=>navigate(`/jobs/description/${job?._id}`)} className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer">
     <div>
         <h1 className="font-medium text-lg">{job?.company?.companyName}</h1>
         <p className="text-gray-500 text-sm">India</p>

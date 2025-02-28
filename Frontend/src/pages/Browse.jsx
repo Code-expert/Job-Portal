@@ -1,17 +1,21 @@
+import { useSelector } from "react-redux";
 import Job from "../components/Job";
+import useGetAllJobs from "../hooks/UseGetAlljobs";
 
-const randomJobs = [1,2,3];
 
 function Browse() {
+    useGetAllJobs();    
+    const {GetAllJobs} = useSelector(store => store.job);
+
   return (
         <div>
             <div className="max-w-7xl mx-auto my-18 ">
-                <h1 className="font-bold text-xl my-10">Search Results ({randomJobs.length})</h1>
-                <div className="grid grid-cols-3 gap-4">
+                <h1 className="font-bold text-xl my-10">Search Results ({GetAllJobs.length})</h1>
+                <div className="grid grid-cols-3 gap-4  ">
                 {
-                    randomJobs.map((items,index)=>{
+                    GetAllJobs.map((job)=>{
                         return (
-                            <Job key={index}/>
+                            <Job key={job._id} job={job}/>
                         )
                     })
                 }

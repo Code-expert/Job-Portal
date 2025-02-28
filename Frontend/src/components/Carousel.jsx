@@ -1,8 +1,11 @@
     import { useRef } from "react";
     import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setsearchQuery } from "../store/jobSlice";
 
     function CategoryCarousel() {
-        const categories = ["IT", "Finance", "Marketing", "Sales", "HR", "Design", "Engineering", "Healthcare"];
+        const categories = ["Fullstack Developer", "Data Science", "Graphic Designer", "Frontend Developer", "Cloud Enginner", "Design", "Engineering", "Healthcare"];
         const scrollContainer = useRef(null);
 
         const scroll = (direction) => {
@@ -11,6 +14,15 @@
                 scrollContainer.current.scrollBy({ left: direction === "next" ? scrollAmount : -scrollAmount, behavior: "smooth" });
             }
         };
+
+        const dispatch = useDispatch();
+        const navigate = useNavigate();
+        const jobSearchHandler = (query) => {
+        dispatch(setsearchQuery(query));
+        navigate("/browse");
+        
+        }
+
 
         return (
             <div className="flex flex-col items-center mt-10 w-full">
@@ -33,15 +45,15 @@
                         {categories.map((cat, i) => (
                             <button
                                 key={i}
-                                onClick={() => console.log(`Searching jobs in ${cat}`)}
-                                className="min-w-max px-5 py-2 border border-gray-600 rounded-full hover:bg-gray-200 transition"
+                                onClick={() => jobSearchHandler(cat)}
+                                className="min-w-max px-5 py-2 border border-gray-600 rounded-full hover:bg-gray-200 transition cursor-pointer"
                             >
                                 {cat}
                             </button>
                         ))}
                     </div>
 
-                    {/* Next Button */}
+                    {/* Next Button */} 
                     <button
                         onClick={() => scroll("next")}
                         className="absolute right-0 z-10 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition shadow-md"

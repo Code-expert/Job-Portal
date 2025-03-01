@@ -1,16 +1,14 @@
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import FilterCard from "../components/FilterCard";
 import Job from "../components/Job";
-import { useEffect, useState } from "react";
 
 function Jobs() {
     const { GetAllJobs, searchQuery } = useSelector((store) => store.job);
     const [filteredJobs, setFilteredJobs] = useState([]);
 
     useEffect(() => {
-        console.log("GetAllJobs:", GetAllJobs); // Debugging
-        console.log("searchQuery:", searchQuery); // Debugging
-
         if (!Array.isArray(GetAllJobs)) {
             console.warn("GetAllJobs is not an array");
             setFilteredJobs([]);
@@ -18,7 +16,6 @@ function Jobs() {
         }
 
         if (!searchQuery || typeof searchQuery !== "object") {
-            console.warn("searchQuery is not a valid object");
             setFilteredJobs(GetAllJobs);
             return;
         }
@@ -33,29 +30,40 @@ function Jobs() {
             );
         });
 
-        console.log("Filtered Jobs:", filtered);
         setFilteredJobs(filtered);
     }, [searchQuery, GetAllJobs]);
 
     return (
-        <div className="max-w-7xl mx-auto mt-5">
-            <div className="flex gap-20">
-                <div className="w-20%">
+        <div className="max-w-7xl mx-auto mt-5 px-4">
+            <div className="flex flex-col md:flex-row gap-6">
+                {/* Sidebar Filters */}
+                <div className="w-full md:w-1/4">
                     <FilterCard />
                 </div>
-                {filteredJobs.length <= 0 ? (
-                    <span>Job not found</span>
-                ) : (
-                    <div className="flex-1 h-[88vh] overflow-y-auto pb-5">
-                        <div className="grid grid-cols-3 gap-4">
+
+                {/* Job Listings */}
+                <div className="flex-1 h-[85vh] overflow-y-auto pb-5">
+                    {filteredJobs.length <= 0 ? (
+                        <span className="text-center text-gray-600 block">No jobs found</span>
+                    ) : (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                        >
                             {filteredJobs.map((job) => (
-                                <div key={job?._id}>
+                                <motion.div
+                                    key={job?._id}
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
                                     <Job job={job} />
-                                </div>
+                                </motion.div>
                             ))}
-                        </div>
-                    </div>
-                )}
+                        </motion.div>
+                    )}
+                </div>
             </div>
         </div>
     );

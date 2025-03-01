@@ -55,7 +55,7 @@ function LoginForm() {
         <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-md w-full max-w-md">
           <div className="flex justify-center mb-4">
           <h1 className="text-2xl font-bold">
-              Job<span className="text-red-500">Portal</span>
+          Job<span className="text-blue-400">Portal</span>
             </h1>
           </div>
           <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>

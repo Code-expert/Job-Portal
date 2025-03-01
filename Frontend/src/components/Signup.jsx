@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import USER_API_END_POINT from "../constant.js"
 import {useNavigate} from "react-router-dom";
@@ -11,7 +11,7 @@ function SignUp() {
   const [formData, setFormData] = useState({ Fullname: "", Email: "", PhoneNumber: "", Password: "", Role: "employee",file:"",
      companyName: "", companyWebsite: "", companyLogo: null 
   });
-  const {loading} = useSelector(store => store.auth);
+  const {loading,user} = useSelector(store => store.auth);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -58,13 +58,18 @@ function SignUp() {
     }
     
   };
+  useEffect(()=>{
+    if(user){
+      navigate("/");
+    }
+  })
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900 bg-opacity-50 backdrop-blur-md py-10">
       <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="flex justify-center mb-4">
         <h1 className="text-2xl font-bold">
-            Job<span className="text-red-500">Portal</span>
+        Job<span className="text-blue-400">Portal</span>
           </h1>
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-700">Sign Up</h2>

@@ -80,7 +80,7 @@ const AdminJobTable = () => {
                     >
                       <button
                         className="flex items-center gap-2 p-2 w-full hover:bg-gray-100 cursor-pointer"
-                      onClick={() => navigate(`/admin/job/${job._id}`)}
+                      onClick={() => navigate(`/admin/job/create`)}
                       >
                         <Edit2 className="w-4" />
                         <span>Edit</span>

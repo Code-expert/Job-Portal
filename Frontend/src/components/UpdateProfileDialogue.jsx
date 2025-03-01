@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import USER_API_END_POINT from '../constant.js';
-import { setUser } from '../store/authSlice.js';
-import { toast } from 'react-toastify';
-import { Loader2 } from 'lucide-react';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import USER_API_END_POINT from "../constant.js";
+import { setUser } from "../store/authSlice.js";
+import { toast } from "react-toastify";
+import { Loader2 } from "lucide-react";
 
 const UpdateProfileDialog = ({ open, setOpen }) => {
     const [loading, setLoading] = useState(false);
-    const { user } = useSelector(store => store.auth);
+    const { user } = useSelector((store) => store.auth);
 
     const [input, setInput] = useState({
         Fullname: user?.Fullname || "",
         Email: user?.Email || "",
         PhoneNumber: user?.PhoneNumber || "",
         bio: user?.Profile?.bio || "",
-        skills: user?.Profile?.skills?.join(', ') || "",
-        file: user?.Profile?.resume || ""
+        skills: user?.Profile?.skills?.join(", ") || "",
+        file: user?.Profile?.resume || "",
     });
 
     const dispatch = useDispatch();
@@ -42,130 +42,100 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         if (input.file) {
             formData.append("file", input.file);
         }
-        console.log("FormData:", formData); // Debugging
+
         try {
             setLoading(true);
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-                withCredentials: true
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
             });
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
                 toast.success(res.data.message);
             }
         } catch (error) {
-            console.log(error);
             toast.error(error.response?.data?.message || "Something went wrong");
         } finally {
             setLoading(false);
         }
         setOpen(false);
-        console.log(input);
     };
 
-    if (!open) return null; // Prevent rendering when dialog is closed
-
+    if (!open) return null;
     return (
         <div
-            className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-sm "
-            onClick={() => setOpen(false)} // Clicking outside closes dialog
+            className="fixed inset-0 flex items-center justify-center  bg-opacity-40 backdrop-blur-sm px-4"
+            onClick={() => setOpen(false)}
         >
             <div
-                className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative"
-                onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
+                className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative"
+                onClick={(e) => e.stopPropagation()} 
             >
-                {/* Close Button */}
+                
                 <button
                     onClick={() => setOpen(false)}
-                    className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 cursor-pointer"
+                    className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 cursor-pointer text-xl"
                     aria-label="Close"
                 >
                     ✖
                 </button>
 
-                {/* Header */}
-                <h2 className="text-xl font-semibold text-center mb-4">Update Profile</h2>
+               
+                <h2 className="text-2xl font-semibold text-center mb-6">Update Profile</h2>
 
-                {/* Form */}
-                <form onSubmit={submitHandler}>
-                    <div className="grid grid-cols-2 gap-4 items-center">
-                        <div>
-                            <label htmlFor="fullname" className="text-right font-medium">Full Name</label>
+            
+                <form onSubmit={submitHandler} className="space-y-4">
+                    {[
+                        { label: "Full Name", name: "Fullname", type: "text" },
+                        { label: "Email", name: "Email", type: "email" },
+                        { label: "Phone Number", name: "PhoneNumber", type: "text" },
+                        { label: "Bio", name: "bio", type: "text" },
+                        { label: "Skills (comma-separated)", name: "skills", type: "text" },
+                    ].map(({ label, name, type }) => (
+                        <div key={name} className="space-y-1">
+                            <label htmlFor={name} className="text-gray-700 font-medium">
+                                {label}
+                            </label>
                             <input
-                                id="fullname"
-                                name="Fullname"
-                                type="text"
-                                value={input.Fullname}
+                                id={name}
+                                name={name}
+                                type={type}
+                                value={input[name]}
                                 onChange={changeEventHandler}
-                                className="w-full p-2 border rounded-md"
+                                className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                             />
                         </div>
-                        <div>
-                            <label htmlFor="email" className="text-right font-medium">Email</label>
-                            <input
-                                id="email"
-                                name="Email"
-                                type="email"
-                                value={input.Email}
-                                onChange={changeEventHandler}
-                                className="w-full p-2 border rounded-md"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="phoneNumber" className="text-right font-medium">Phone Number</label>
-                            <input
-                                id="phoneNumber"
-                                name="PhoneNumber"
-                                type="text"
-                                value={input.PhoneNumber}
-                                onChange={changeEventHandler}
-                                className="w-full p-2 border rounded-md"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="bio" className="text-right font-medium">Bio</label>
-                            <input
-                                id="bio"
-                                name="bio"
-                                type="text"
-                                value={input.bio}
-                                onChange={changeEventHandler}
-                                className="w-full p-2 border rounded-md"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="skills" className="text-right font-medium">Skills</label>
-                            <input
-                                id="skills"
-                                name="skills"
-                                type="text"
-                                value={input.skills}
-                                onChange={changeEventHandler}
-                                className="w-full p-2 border rounded-md"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="file" className="text-right font-medium">Resume</label>
-                            <input
-                                id="file"
-                                name="file"
-                                type="file"
-                                accept="/*"
-                                onChange={fileChangeHandler}
-                                className="w-full p-2 border rounded-md"
-                            />
-                        </div>
+                    ))}
+
+                 
+                    <div className="space-y-1">
+                        <label htmlFor="file" className="text-gray-700 font-medium">
+                            Upload Resume
+                        </label>
+                        <input
+                            id="file"
+                            name="file"
+                            type="file"
+                            accept="/*"
+                            onChange={fileChangeHandler}
+                            className="w-full p-3 border rounded-md"
+                        />
                     </div>
 
-                    {/* Submit Button */}
-                    {
-                                loading ? <button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </button> : <button type="submit" className="w-full my-4">Update</button>
-                            }
+                   
+                    <button
+                        type="submit"
+                        className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition duration-200"
+                        disabled={loading}
+                    >
+                        {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : "Update"}
+                    </button>
                 </form>
             </div>
         </div>
     );
 };
+
 UpdateProfileDialog.propTypes = {
     open: PropTypes.bool.isRequired,
     setOpen: PropTypes.func.isRequired,

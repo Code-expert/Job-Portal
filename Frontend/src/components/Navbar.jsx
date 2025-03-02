@@ -62,7 +62,7 @@ function Navbar() {
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-4 md:px-8">
         {/* Logo */}
         <h1 className="text-2xl font-bold cursor-pointer text-white">
-          <Link to="/">Job<span className="text-blue-400">Portal</span></Link>
+          <Link to="/">Jobify<span className="text-blue-400">Hub</span></Link>
         </h1>
 
         {/* Mobile Menu Button */}

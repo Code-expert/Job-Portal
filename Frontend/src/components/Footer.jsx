@@ -9,7 +9,7 @@ function Footer() {
         {/* Logo & About */}
         <div>
           <h2 className="text-xl font-bold text-white">
-            Job<span className="text-red-500">Portal</span>
+            Jobify<span className="text-blue-500">Hub</span>
           </h2>
           <p className="mt-2 text-gray-400">Your gateway to exciting job opportunities.</p>
         </div>

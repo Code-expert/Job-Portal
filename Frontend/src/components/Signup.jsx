@@ -27,7 +27,7 @@ function SignUp() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     
-    // Clear password error when user starts typing again
+    
     if (e.target.name === "Password") {
       setPasswordError("");
     }
@@ -43,17 +43,17 @@ function SignUp() {
   };
   
   const validatePassword = (password) => {
-    // Check minimum length
+    
     if (password.length < 8) {
       return "Password must be at least 8 characters long";
     }
     
-    // Check for at least one capital letter
+   
     if (!/[A-Z]/.test(password)) {
       return "Password must contain at least one capital letter";
     }
     
-    // Check for at least one special character
+   
     if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
       return "Password must contain at least one special character";
     }
@@ -113,7 +113,7 @@ function SignUp() {
       <div className="bg-white bg-opacity-90 backdrop-blur-lg p-8 rounded-xl shadow-xl w-full max-w-md">
         <div className="flex justify-center mb-4">
           <h1 className="text-2xl font-bold text-gray-800">
-            Job<span className="text-blue-400">Portal</span>
+            Jobify<span className="text-blue-400">Hub</span>
           </h1>
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-700">Sign Up</h2>

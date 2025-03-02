@@ -64,7 +64,7 @@ const PostJob = () => {
             >
                 <h1 className="text-2xl font-bold text-center mb-4">
                     <Link to="/">
-                        Job<span className="text-blue-600">Portal</span>
+                        Jobify<span className="text-blue-600">Hub</span>
                     </Link>
                 </h1>
 

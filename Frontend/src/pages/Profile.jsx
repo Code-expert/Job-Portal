@@ -14,11 +14,11 @@ function Profile() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 py-6">
-      
+
       {/* Profile Card */}
       <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 border border-gray-200">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between">
-          
+
           {/* Profile Info */}
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 w-full">
             <img
@@ -73,21 +73,22 @@ function Profile() {
         </div>
 
         {/* Resume Section */}
+
         <div className="mt-5">
-          <h2 className="font-bold text-lg text-gray-800 text-center md:text-left">Resume</h2>
+          <h2 className="font-bold text-lg text-gray-800">Resume</h2>
           {isResume && user?.Profile?.resume ? (
             <div className="text-center md:text-left">
+             
               <a
+                href={`https://docs.google.com/viewer?url=${encodeURIComponent(user?.Profile?.resume)}&embedded=true`}
                 target="_blank"
                 rel="noopener noreferrer"
-                href={user?.Profile?.resume}
-                className="text-blue-600 hover:underline mt-2 inline-block"
-              >
-                {user?.Profile?.ResumeoriginalName || "Download Resume"}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-2 ml-2 inline-block"
+              >{user?.Profile?.ResumeoriginalName || "View Resume"}
               </a>
             </div>
           ) : (
-            <span className="text-gray-500 text-center md:text-left block">No resume uploaded</span>
+            <span className="text-gray-500">No resume uploaded</span>
           )}
         </div>
       </div>
@@ -95,7 +96,7 @@ function Profile() {
       {/* Applied Jobs Section */}
       <div className="bg-white shadow-lg rounded-xl p-6 mt-6 border border-gray-200">
         <h2 className="font-bold text-xl text-gray-800 mb-4 text-center md:text-left">Applied Jobs</h2>
-        
+
         {/* Scrollable Table on Small Screens */}
         <div className="overflow-x-auto">
           <AppliedJobTable />

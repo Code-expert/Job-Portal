@@ -7,17 +7,19 @@ import userRouter from './Routes/User.js';
 import companyRouter from './Routes/Company.js';
 import jobRouter from './Routes/Job.js';
 import applicationRouter from './Routes/Application.js';
-const app = express();
 dotenv.config({});
+const app = express();
 
 //Middlewares...
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const corsOptions={
-    origin:'http://localhost:5173',
-    credentials:true
-}
+const corsOptions = {
+  origin: ["http://localhost:5173"], // Allow frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Allow cookies
+};
+
 app.use(cors(corsOptions));
 
 

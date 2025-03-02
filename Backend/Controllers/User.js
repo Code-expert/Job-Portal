@@ -120,59 +120,70 @@ export const logout = async  (req,res) =>{
     console.log("Logout error",error);
    }
 };
-export const updateProfile = async (req,res) =>{
+// In your updateProfile function (backend)
+export const updateProfile = async (req, res) => {
     try {
-        const {Fullname,Email,PhoneNumber,bio,skills} = req.body;
-
+        const { Fullname, Email, PhoneNumber, bio, skills } = req.body;
         const file = req.file;
-        const fileUri = getDataUri(file);   
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content); 
+
+        let cloudResponse = null;
+        if (file) {
+            const fileUri = getDataUri(file);
+
+            // ✅ Ensure PDFs are uploaded as "raw" type
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+                resource_type: file.mimetype === "application/pdf" ? "raw" : "auto",
+                public_id: `resumes/${req.id}_${Date.now()}`
+            });
+
+            console.log("Cloudinary Upload Response:", cloudResponse); // Debugging
+        }
 
         let skillsArray;
         if (skills) {
-             skillsArray = skills.split(",");
+            skillsArray = skills.split(",");
         }
-       
-        const userId = req.id;
 
+        const userId = req.id;
         let user = await User.findById(userId);
 
-        if(!user){
+        if (!user) {
             return res.status(400).json({
-                message:"User does not exist",
-                success:false,
-            })
+                message: "User does not exist",
+                success: false,
+            });
         }
-        //updating the data
-        if(Fullname) user.Fullname=Fullname
-        if(Email) user.Email=Email
-        if(PhoneNumber) user.PhoneNumber=PhoneNumber
-        if(bio) user.Profile.bio= bio
-        if(skills) user.Profile.skills=skillsArray
+
+        // 🔹 Updating user data
+        if (Fullname) user.Fullname = Fullname;
+        if (Email) user.Email = Email;
+        if (PhoneNumber) user.PhoneNumber = PhoneNumber;
+        if (bio) user.Profile.bio = bio;
+        if (skills) user.Profile.skills = skillsArray;
 
         if (cloudResponse) {
-            user.Profile.resume = cloudResponse.secure_url, 
-            user.Profile.ResumeoriginalName = file.originalname
+            user.Profile.resume = cloudResponse.secure_url;
+            user.Profile.ResumeoriginalName = file.originalname;
         }
 
         await user.save();
 
-        user={
-            _id:user._id,
-            Fullname:user.Fullname,
-            Email:user.Email,
-            PhoneNumber:user.PhoneNumber,
-            Role:user.Role,
-            Profile:user.Profile,
-        }
+        user = {
+            _id: user._id,
+            Fullname: user.Fullname,
+            Email: user.Email,
+            PhoneNumber: user.PhoneNumber,
+            Role: user.Role,
+            Profile: user.Profile,
+        };
 
         return res.status(201).json({
-            message:"Profile Updated  succesfully ",
+            message: "Profile Updated successfully",
             user,
-            success:true,
+            success: true,
         });
 
     } catch (error) {
-        console.log("updateProfile Error",error);
+        console.log("updateProfile Error", error);
     }
-}
+};

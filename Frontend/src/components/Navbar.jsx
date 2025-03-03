@@ -163,7 +163,7 @@ function Navbar() {
                       <li><button onClick={() => navigateTo("/jobs")}>Jobs</button></li>
                       <li><button onClick={() => navigateTo("/browse")}>Browse</button></li>
                     </>
-                  )}                  
+                  )}
                   {/* Add Logout for Mobile if logged in */}
                   {user && (
                     <li>

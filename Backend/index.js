@@ -31,6 +31,9 @@ app.use('/api/v1/user',userRouter);
 app.use('/api/v1/company',companyRouter);
 app.use('/api/v1/job',jobRouter);
 app.use('/api/v1/application',applicationRouter);
+app.get('/',(req,res)=>{
+  res.send('Welcome to Job Portal');
+})
 
 if(process.env.NODE_ENV === 'production'){
   const dirpath = path.resolve();

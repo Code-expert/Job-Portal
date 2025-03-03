@@ -99,7 +99,7 @@ function Navbar() {
             <img
               ref={avatarRef}
               className="size-10 rounded-full ring-2 ring-blue-400 cursor-pointer"
-              src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/150"}
+              src={user?.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}
               alt="Profile"
               onClick={toggleDropdown}
             />

@@ -7,7 +7,6 @@ import userRouter from './Routes/User.js';
 import companyRouter from './Routes/Company.js';
 import jobRouter from './Routes/Job.js';
 import applicationRouter from './Routes/Application.js';
-import path from 'path';
 dotenv.config({});
 const app = express();
 
@@ -35,13 +34,8 @@ app.get('/',(req,res)=>{
   res.send('Welcome to Job Portal');
 })
 
-if(process.env.NODE_ENV === 'production'){
-  const dirpath = path.resolve();
-  app.use(express.static('Frontend/build'));
-  app.get('*',(req,res)=>{
-    res.sendFile(path.resolve(dirpath,'Frontend','build','index.html'));  
-  });
-}
+
+
 
 
 

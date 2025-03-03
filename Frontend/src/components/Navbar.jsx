@@ -62,7 +62,7 @@ function Navbar() {
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-4 md:px-8">
         {/* Logo */}
         <h1 className="text-2xl font-bold cursor-pointer text-white">
-          <Link to="/">Jobify<span className="text-blue-400">Hub</span></Link>
+          <Link to="/">Job<span className="text-blue-400">Portal</span></Link>
         </h1>
 
         {/* Mobile Menu Button */}
@@ -99,7 +99,7 @@ function Navbar() {
             <img
               ref={avatarRef}
               className="size-10 rounded-full ring-2 ring-blue-400 cursor-pointer"
-              src={user?.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"}
+              src={user?.Profile?.ProfilePhoto || "https://via.placeholder.com/150"}
               alt="Profile"
               onClick={toggleDropdown}
             />
@@ -107,18 +107,20 @@ function Navbar() {
               {isOpen && (
                 <motion.div
                   ref={dropdownRef}
-                  className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-3 z-50"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-3 z-50"
                 >
-                  <Link
-                    to="/profile"
-                    className="w-full flex items-center gap-2 text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <ImProfile className="text-lg" /> View Profile
-                  </Link>
+                  {user?.Role === "employee" && (
+                    <Link
+                      to="/profile"
+                      className="w-full flex items-center gap-2 text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <ImProfile className="text-lg" /> View Profile
+                    </Link>
+                  )}
                   <button
                     className="w-full flex items-center gap-2 text-left px-3 py-2 text-red-500 hover:bg-red-100 rounded"
                     onClick={logoutHandler}
@@ -146,10 +148,7 @@ function Navbar() {
                 transition={{ duration: 0.3 }}
                 className="fixed top-0 right-0 w-2/3 h-full bg-gray-900 text-white flex flex-col items-center justify-center gap-6 z-50 shadow-lg"
               >
-                <button
-                  className="absolute top-5 right-5 text-white text-3xl"
-                  onClick={() => setMenuOpen(false)}
-                >
+                <button className="absolute top-5 right-5 text-white text-3xl" onClick={() => setMenuOpen(false)}>
                   <FaTimes />
                 </button>
                 <ul className="font-medium flex flex-col items-center gap-6">
@@ -164,15 +163,15 @@ function Navbar() {
                       <li><button onClick={() => navigateTo("/jobs")}>Jobs</button></li>
                       <li><button onClick={() => navigateTo("/browse")}>Browse</button></li>
                     </>
+                  )}                  
+                  {/* Add Logout for Mobile if logged in */}
+                  {user && (
+                    <li>
+                      <button className="text-red-500" onClick={logoutHandler}>
+                        Logout
+                      </button>
+                    </li>
                   )}
-                  <li>
-                    <button
-                      className="text-red-500"
-                      onClick={logoutHandler}
-                    >
-                      Logout
-                    </button>
-                  </li>
                 </ul>
               </motion.div>
             </>

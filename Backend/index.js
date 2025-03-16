@@ -23,6 +23,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
+
 app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
@@ -32,6 +33,9 @@ app.use('/api/v1/company', companyRouter);
 app.use('/api/v1/job', jobRouter);
 app.use('/api/v1/application', applicationRouter);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to Job Portal');
+});
 
 app.listen(PORT, () => {
   mongoDb();

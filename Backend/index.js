@@ -1,4 +1,4 @@
-import  express  from 'express';
+import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -7,36 +7,30 @@ import userRouter from './Routes/User.js';
 import companyRouter from './Routes/Company.js';
 import jobRouter from './Routes/Job.js';
 import applicationRouter from './Routes/Application.js';
+
 dotenv.config({});
 const app = express();
 
-//Middlewares...
+// Middlewares...
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 const corsOptions = {
-  origin: ["http://localhost:5173"], 
+  origin: ["http://localhost:5173", "https://jobifyhub.vercel.app"], // Allow both local and deployed frontend
+  credentials: true, // Allow cookies to be sent
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Allow cookies
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
 
+const PORT = process.env.PORT || 3000;
 
-
-const PORT =process.env.PORT||3000;
-
-app.use('/api/v1/user',userRouter);
-app.use('/api/v1/company',companyRouter);
-app.use('/api/v1/job',jobRouter);
-app.use('/api/v1/application',applicationRouter);
-app.get('/',(req,res)=>{
-  res.send('Welcome to Job Portal');
-})
-
-
-
-
+app.use('/api/v1/user', userRouter);
+app.use('/api/v1/company', companyRouter);
+app.use('/api/v1/job', jobRouter);
+app.use('/api/v1/application', applicationRouter);
 
 
 app.listen(PORT, () => {

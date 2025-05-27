@@ -76,8 +76,8 @@ A professional, responsive **MERN stack** Job Portal application built to connec
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Code-expert/jobify.git
-cd jobify
+git clone https://github.com/Code-expert/Job-Portal.git
+cd Job-Portal
 ````
 
 ### 2. Setup Backend

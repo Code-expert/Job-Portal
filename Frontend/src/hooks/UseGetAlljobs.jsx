@@ -11,7 +11,9 @@ const useGetAllJobs = () => {
   useEffect(() => {
     const fetchAllJobs = async () => {
       try { 
-        const res = await axios.get(`${JOB_API_END_POINT}/get?keyword=${searchQuery}`,{
+        // Fix object Object bug if searchQuery comes from FilterCard
+        const keyword = typeof searchQuery === "string" ? searchQuery : "";
+        const res = await axios.get(`${JOB_API_END_POINT}/get?keyword=${keyword}`,{
              withCredentials: true
              });
 

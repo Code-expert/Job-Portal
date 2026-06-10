@@ -37,35 +37,35 @@ const CompaniesTable = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg overflow-x-auto">
-      <table className="w-full min-w-[600px]">
-        <caption className="text-gray-600 my-2 text-lg font-semibold">
+    <div className="p-6 md:p-8 bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 rounded-3xl overflow-x-auto mt-6">
+      <table className="w-full text-left border-collapse min-w-[600px]">
+        <caption className="text-gray-500 my-4 text-sm text-left font-medium">
           Recent Registered Companies
         </caption>
         <thead>
-          <tr className="bg-gray-100 text-gray-700 text-left">
-            <th className="p-3">Logo</th>
-            <th className="p-3">Name</th>
-            <th className="p-3">Date</th>
-            <th className="p-3 text-right">Action</th>
+          <tr className="border-b-2 border-gray-100">
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Logo</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Name</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Date</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm text-right">Action</th>
           </tr>
         </thead>
         <tbody>
           {filterCompany?.map((company) => (
-            <tr key={company._id} className="border-b hover:bg-gray-50 transition">
-              <td className="p-3">
+            <tr key={company._id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
+              <td className="py-4 px-2">
                 <img
                   src={
                     company.logo ||
                     "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"
                   }
                   alt="Company Logo"
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-12 h-12 rounded-full object-cover shadow-sm border border-gray-100"
                 />
               </td>
-              <td className="p-3">{company.companyName}</td>
-              <td className="p-3">{company.createdAt.split("T")[0]}</td>
-              <td className="p-3 text-right relative">
+              <td className="py-4 px-2 font-semibold text-gray-800">{company.companyName}</td>
+              <td className="py-4 px-2 text-gray-600">{company.createdAt.split("T")[0]}</td>
+              <td className="py-4 px-2 text-right relative">
                 {/* Dropdown Button */}
                 <button
                   onClick={() => toggleDropdown(company._id)}

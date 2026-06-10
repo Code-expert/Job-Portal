@@ -41,26 +41,32 @@ const AdminJobTable = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg">
-      <table className="w-full">
-        <caption className="text-gray-600 my-2">
+    <div className="p-6 md:p-8 bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 rounded-3xl overflow-x-auto mt-6">
+      <table className="w-full text-left border-collapse min-w-[600px]">
+        <caption className="text-gray-500 my-4 text-sm text-left">
           A list of your recent job postings
         </caption>
         <thead>
-          <tr className="bg-white">
-            <th className="p-2 text-left">Company Name</th>
-            <th className="p-2 text-left">Role</th>
-            <th className="p-2 text-left">Date</th>
-            <th className="p-2 text-right">Action</th>
+          <tr className="border-b-2 border-gray-100">
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Company Name</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Role</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Sector</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm">Date</th>
+            <th className="py-4 px-2 font-semibold text-gray-500 uppercase tracking-wider text-sm text-right">Action</th>
           </tr>
         </thead>
         <tbody>
           {filterjob?.map((job) => (
-            <tr key={job._id} className="border-0 hover:bg-gray-50">
-              <td className="p-2">{job?.company?.companyName}</td>
-              <td className="p-2">{job?.title}</td>
-              <td className="p-2">{job?.createdAt.split("T")[0]}</td>
-              <td className="p-2 text-right relative">
+            <tr key={job._id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
+              <td className="py-4 px-2 font-medium text-gray-800">{job?.company?.companyName || "N/A"}</td>
+              <td className="py-4 px-2 text-gray-600">{job?.title}</td>
+              <td className="py-4 px-2">
+                <span className={`px-2 py-1 text-xs font-semibold rounded-full ${job?.sector === 'informal' ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'}`}>
+                  {job?.sector === 'informal' ? 'Informal' : 'Formal'}
+                </span>
+              </td>
+              <td className="py-4 px-2 text-gray-600">{job?.createdAt.split("T")[0]}</td>
+              <td className="py-4 px-2 text-right relative">
                 <button
                   onClick={() => toggleDropdown(job._id)}
                   className="cursor-pointer p-2 rounded-full hover:bg-gray-200"

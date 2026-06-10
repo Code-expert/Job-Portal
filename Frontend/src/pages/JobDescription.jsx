@@ -63,18 +63,22 @@ function JobDescription() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       {/* Job Header */}
-      <div className="bg-blue-300 shadow-lg rounded-lg p-6">
+      <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div>
-            <h1 className="text-2xl font-bold">{SingleJob?.title}</h1>
-            <div className="flex flex-wrap gap-2 mt-3">
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+            <h1 className="text-3xl font-extrabold text-gray-900">{SingleJob?.title}</h1>
+            <p className="text-lg text-gray-500 mt-1 font-medium">{SingleJob?.company?.companyName || "Individual Client"} • {SingleJob?.location}</p>
+            <div className="flex flex-wrap gap-3 mt-4">
+              <span className={`px-3 py-1 text-sm font-semibold rounded-full ${SingleJob?.sector === 'informal' ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'}`}>
+                {SingleJob?.sector === 'informal' ? 'Informal Sector' : 'Formal Sector'}
+              </span>
+              <span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-semibold rounded-full border border-blue-100">
                 {SingleJob?.Position} Positions
               </span>
-              <span className="px-3 py-1 bg-red-100 text-red-700 text-sm font-medium rounded-full">
+              <span className="px-3 py-1 bg-red-50 text-red-700 text-sm font-semibold rounded-full border border-red-100">
                 {SingleJob?.salary} LPA
               </span>
-              <span className="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">
+              <span className="px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-full border border-purple-100">
                 {SingleJob?.jobtype}
               </span>
             </div>
@@ -82,10 +86,10 @@ function JobDescription() {
           <button
             onClick={!isApplied ? applyJobHandler : null}
             disabled={isApplied}
-            className={`mt-4 md:mt-0 px-5 py-2 rounded-lg text-white font-semibold transition-all ${
+            className={`mt-6 md:mt-0 px-8 py-3 rounded-xl text-white font-bold transition-all shadow-md ${
               isApplied
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
+                ? "bg-gray-400 cursor-not-allowed shadow-none"
+                : "bg-indigo-600 hover:bg-indigo-700 hover:shadow-lg hover:-translate-y-1"
             }`}
           >
             {isApplied ? "Already Applied" : "Apply Now"}
@@ -94,14 +98,14 @@ function JobDescription() {
       </div>
 
       {/* Job Details */}
-      <div className="bg-white shadow-lg rounded-lg p-6 mt-6">
-        <h2 className="text-lg font-semibold border-b pb-2 mb-4">Job Description</h2>
-        <p className="text-gray-700">{SingleJob?.description}</p>
+      <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8 mt-6">
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4 mb-4">Job Description</h2>
+        <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{SingleJob?.description}</p>
       </div>
 
       {/* Job Info Section */}
-      <div className="bg-white shadow-lg rounded-lg p-6 mt-6">
-        <h2 className="text-lg font-semibold border-b pb-2 mb-4">Job Details</h2>
+      <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8 mt-6">
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4 mb-4">Key Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <p className="text-gray-700">
             <span className="font-semibold">Role:</span> {SingleJob?.title}

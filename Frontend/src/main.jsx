@@ -13,10 +13,11 @@ import Jobs from './pages/Jobs.jsx'
 import Browse from './pages/Browse.jsx'
 import Profile from './pages/Profile.jsx'
 import JobDescription from './pages/JobDescription.jsx'
+import Messages from './pages/Messages.jsx'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import Companies from './pages/admin/Companies.jsx'
-import CompanyCreate from './pages/admin/CompanyCreate.jsx'
+import CompanyCreate from './pages/admin/CompanyCreate.jsx' 
 import CompanySetup from './pages/admin/CompanySetup.jsx'
 import AdminJob from './pages/admin/AdminJob.jsx'
 import PostJob from './pages/admin/PostJob.jsx'
@@ -56,6 +57,12 @@ const appRouter = createBrowserRouter([
         path: "/jobs/description/:id",
         element: (
           <JobDescription />
+        ),
+      },
+      {
+        path: "/messages",
+        element: (
+          <Messages />
         ),
       },
       {

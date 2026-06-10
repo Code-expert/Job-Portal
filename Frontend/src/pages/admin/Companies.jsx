@@ -20,14 +20,14 @@ function Companies() {
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Search Input */}
         <input
-          className="w-full md:w-96 p-3 shadow-lg bg-gray-100 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          className="w-full md:w-96 p-3 shadow-sm bg-white rounded-2xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all"
           placeholder="🔍 Search for Companies"
           onChange={(e) => setInput(e.target.value)}
         />
 
         {/* New Company Button */}
         <Link to="/admin/companies/create">
-          <button className="bg-blue-400 hover:bg-blue-500 text-white px-5 py-3 rounded-xl shadow-md transition">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl shadow-md hover:shadow-lg transition-all font-medium">
             ➕ New Company
           </button>
         </Link>

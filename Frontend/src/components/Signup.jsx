@@ -109,26 +109,26 @@ function SignUp() {
   }, [user]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-600 py-10">
-      <div className="bg-white bg-opacity-90 backdrop-blur-lg p-8 rounded-xl shadow-xl w-full max-w-md">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-600 py-10 mt-16">
+      <div className="bg-white/70 backdrop-blur-xl border border-white/50 p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="flex justify-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-800">
-            Jobify<span className="text-blue-400">Hub</span>
+          <h1 className="text-3xl font-extrabold text-gray-800">
+            <a href="/">Jobify<span className="text-indigo-600">Hub</span></a>
           </h1>
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
             <label className="block text-gray-600 text-sm">Full Name</label>
-            <input type="text" name="Fullname" value={formData.Fullname} onChange={handleChange} className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-blue-400" required />
+            <input type="text" name="Fullname" value={formData.Fullname} onChange={handleChange} className="w-full p-3 bg-white/60 border border-gray-200 rounded-lg mt-1 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all" required />
           </div>
           <div>
             <label className="block text-gray-600 text-sm">Email Address</label>
-            <input type="email" name="Email" value={formData.Email} onChange={handleChange} className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-blue-400" required />
+            <input type="email" name="Email" value={formData.Email} onChange={handleChange} className="w-full p-3 bg-white/60 border border-gray-200 rounded-lg mt-1 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all" required />
           </div>
           <div>
             <label className="block text-gray-600 text-sm">Phone Number</label>
-            <input type="tel" name="PhoneNumber" value={formData.PhoneNumber} onChange={handleChange} className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-blue-400" required />
+            <input type="tel" name="PhoneNumber" value={formData.PhoneNumber} onChange={handleChange} className="w-full p-3 bg-white/60 border border-gray-200 rounded-lg mt-1 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all" required />
           </div>
           <div>
             <label className="block text-gray-600 text-sm">Password</label>
@@ -137,7 +137,7 @@ function SignUp() {
               name="Password" 
               value={formData.Password} 
               onChange={handleChange} 
-              className={`w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-blue-400 ${passwordError ? 'border-red-500' : ''}`} 
+              className={`w-full p-3 bg-white/60 border rounded-lg mt-1 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all ${passwordError ? 'border-red-500' : 'border-gray-200'}`} 
               required 
             />
             {passwordError && <p className="text-red-500 text-xs mt-1">{passwordError}</p>}
@@ -190,7 +190,7 @@ function SignUp() {
               Please wait...
             </button>
           ) : (
-            <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition duration-300">
+            <button type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md shadow-indigo-500/30 font-semibold">
               Sign up
             </button>
           )}

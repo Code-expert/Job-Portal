@@ -2,14 +2,19 @@ import Job from "../Models/job.js";
 
 export const createJob = async (req, res) => {
     try {
-        const{title,description,requirement,salary,ExperienceLevel,location,jobtype,Position,companyId} = req.body;
+        const{title,description,requirement,salary,ExperienceLevel,location,jobtype,Position,companyId,sector} = req.body;
         const userId = req.id;
-        if (!title ||!description|| !requirement || !salary || !ExperienceLevel || !location || !jobtype || !Position||!companyId ) {
+        if (!title ||!description|| !requirement || !salary || !ExperienceLevel || !location || !jobtype || !Position) {
             return res.status(400).json({
-                message: "Please fill all the fields",
+                message: "Please fill all the required fields",
                 success: false,
             });
-            
+        }
+        if (sector !== "informal" && !companyId) {
+            return res.status(400).json({
+                message: "Company is required for formal jobs",
+                success: false,
+            });
         }
         const job = await Job.create({
             title,
@@ -20,7 +25,8 @@ export const createJob = async (req, res) => {
             location,
             jobtype,
             Position,
-            company:companyId,
+            sector: sector || "formal",
+            company:companyId || undefined,
             createdBy:userId,
         });
         return res.status(201).json({
@@ -35,6 +41,7 @@ export const createJob = async (req, res) => {
 export const getJobs = async (req, res) => {
     try {
         const keyword = req.query.keyword ||"";
+        const sector = req.query.sector || "";
         const query = {
             $or:[
                 {title:{
@@ -48,6 +55,9 @@ export const getJobs = async (req, res) => {
                
             ]
         };
+        if (sector) {
+            query.sector = sector;
+        }
         const jobs = await Job.find(query).populate({
             path:"company",
         }).sort("-createdAt");

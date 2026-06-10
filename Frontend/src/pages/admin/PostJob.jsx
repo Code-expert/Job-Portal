@@ -19,6 +19,7 @@ const PostJob = () => {
         ExperienceLevel: "",
         companyId: "",
         Position: "0",
+        sector: "formal",
     });
     const [loading, setLoading] = useState(false);
 
@@ -62,9 +63,9 @@ const PostJob = () => {
                 onSubmit={submitHandler}
                 className="p-8 max-w-4xl border border-gray-200 shadow-lg rounded-lg"
             >
-                <h1 className="text-2xl font-bold text-center mb-4">
+                <h1 className="text-3xl font-extrabold text-center mb-6">
                     <Link to="/">
-                        Jobify<span className="text-blue-600">Hub</span>
+                        Jobify<span className="text-indigo-600">Hub</span>
                     </Link>
                 </h1>
 
@@ -101,7 +102,20 @@ const PostJob = () => {
                         />
                     </div>
 
-                    {companies.length > 0 && (
+                    <div>
+                        <label className="block text-gray-700 font-medium">Sector</label>
+                        <select
+                            name="sector"
+                            value={input.sector}
+                            onChange={changeHandler}
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        >
+                            <option value="formal">Formal Sector (IT, Finance, etc.)</option>
+                            <option value="informal">Informal Sector (Plumber, Electrician, etc.)</option>
+                        </select>
+                    </div>
+
+                    {input.sector === "formal" && companies.length > 0 && (
                         <select
                             onChange={(e) => selectChangeHandler(e.target.value)}
                             className="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -128,13 +142,13 @@ const PostJob = () => {
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-500 mt-4 disabled:opacity-50"
-                        disabled={!input.title || !input.description || !input.companyId}
+                        disabled={!input.title || !input.description || (input.sector === "formal" && !input.companyId)}
                     >
                         Post a Job
                     </button>
                 )}
 
-                {companies.length === 0 && (
+                {input.sector === "formal" && companies.length === 0 && (
                     <p className="text-xs text-red-600 font-bold text-center my-3">
                         *Please register a company first before posting a job.
                     </p>

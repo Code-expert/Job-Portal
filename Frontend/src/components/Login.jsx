@@ -50,11 +50,11 @@ function LoginForm() {
   }, [user]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-600">
-      <div className="bg-white bg-opacity-90 backdrop-blur-lg p-8 rounded-xl shadow-xl w-full max-w-md">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-600">
+      <div className="bg-white/70 backdrop-blur-xl border border-white/50 p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="flex justify-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-800">
-            Jobify<span className="text-blue-400">Hub</span>
+          <h1 className="text-3xl font-extrabold text-gray-800">
+            <a href="/">Jobify<span className="text-indigo-600">Hub</span></a>
           </h1>
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>
@@ -66,7 +66,7 @@ function LoginForm() {
               name="Email"
               value={formData.Email}
               onChange={handleChange}
-              className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 bg-white/60 border border-gray-200 rounded-lg mt-1 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all"
               required
             />
           </div>
@@ -78,7 +78,7 @@ function LoginForm() {
               name="Password"
               value={formData.Password}
               onChange={handleChange}
-              className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 bg-white/60 border border-gray-200 rounded-lg mt-1 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all"
               required
             />
           </div>
@@ -122,7 +122,7 @@ function LoginForm() {
           ) : (
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition duration-300 mt-4"
+              className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-300 mt-4 shadow-md shadow-indigo-500/30 font-semibold"
             >
               Login
             </button>

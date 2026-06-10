@@ -16,24 +16,33 @@ const filterData = [
   {
     filterType: "Salary",
     key: "salary",
-    array: ["0-40k", "40k-1L", "1L-5L", "5L-10L"],
+    array: ["0-40k", "40k-1L", "1L-5L", "5L-10L", "10L+"],
+  },
+  {
+    filterType: "Sector",
+    key: "sector",
+    array: ["Formal", "Informal"],
   },
 ];
 
 const FilterCard = () => {
   const [selectedFilters, setSelectedFilters] = useState({
-    location: "",
-    industry: "",
-    salary: "",
+    location: [],
+    industry: [],
+    salary: [],
+    sector: [],
   });
 
   const dispatch = useDispatch();
 
-  const changeHandler = (event, key) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [key]: event.target.value,
-    }));
+  const changeHandler = (key, item) => {
+    setSelectedFilters((prev) => {
+      const isSelected = prev[key].includes(item);
+      const newArr = isSelected 
+        ? prev[key].filter((val) => val !== item) 
+        : [...prev[key], item];
+      return { ...prev, [key]: newArr };
+    });
   };
 
   // Debounced filter update to Redux
@@ -46,9 +55,17 @@ const FilterCard = () => {
   }, [selectedFilters, dispatch]);
 
   return (
-    <div className="w-full bg-white p-5 rounded-lg shadow-md border border-gray-200">
-      <h1 className="font-bold text-xl text-gray-800">Filter Jobs</h1>
-      <hr className="mt-3 border-gray-300" />
+    <div className="w-full bg-white/80 backdrop-blur-xl p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white/60 max-h-[calc(100vh-8rem)] overflow-y-auto no-scrollbar">
+      <div className="flex justify-between items-center">
+        <h1 className="font-bold text-xl text-gray-800">Filter Jobs</h1>
+        <button 
+          onClick={() => setSelectedFilters({ location: [], industry: [], salary: [], sector: [] })}
+          className="text-sm text-indigo-600 font-semibold hover:underline"
+        >
+          Clear All
+        </button>
+      </div>
+      <hr className="mt-3 border-gray-100" />
       
       {filterData.map((data, index) => (
         <div key={index} className="mt-4">
@@ -56,17 +73,17 @@ const FilterCard = () => {
           {data.array.map((item, idx) => {
             const itemId = `${data.key}-${idx}`;
             return (
-              <div key={itemId} className="flex items-center space-x-3 my-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition">
+              <div key={itemId} className="flex items-center space-x-3 my-2 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
                 <input
-                  type="radio"
-                  name={data.key} // Unique name per category
+                  type="checkbox"
+                  name={data.key}
                   value={item}
                   id={itemId}
-                  checked={selectedFilters[data.key] === item}
-                  onChange={(e) => changeHandler(e, data.key)}
-                  className="cursor-pointer accent-blue-600"
+                  checked={selectedFilters[data.key].includes(item)}
+                  onChange={() => changeHandler(data.key, item)}
+                  className="w-4 h-4 cursor-pointer accent-indigo-600 rounded text-indigo-600 focus:ring-indigo-500"
                 />
-                <label htmlFor={itemId} className="cursor-pointer text-gray-800">
+                <label htmlFor={itemId} className="cursor-pointer text-gray-700 w-full font-medium text-sm">
                   {item}
                 </label>
               </div>

@@ -187,3 +187,38 @@ export const updateProfile = async (req, res) => {
         console.log("updateProfile Error", error);
     }
 };
+
+export const toggleSaveJob = async (req, res) => {
+    try {
+        const userId = req.id;
+        const jobId = req.params.id;
+
+        let user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false });
+        }
+
+        const isSaved = user.Profile.savedJobs?.some(id => id.toString() === jobId);
+
+        if (isSaved) {
+            // Unsave
+            user.Profile.savedJobs = user.Profile.savedJobs.filter(id => id.toString() !== jobId);
+        } else {
+            // Save
+            if(!user.Profile.savedJobs) user.Profile.savedJobs = [];
+            user.Profile.savedJobs.push(jobId);
+        }
+
+        await user.save();
+
+        return res.status(200).json({
+            message: isSaved ? "Job removed from saved list" : "Job saved successfully",
+            savedJobs: user.Profile.savedJobs,
+            success: true
+        });
+
+    } catch (error) {
+        console.log("toggleSaveJob error", error);
+        return res.status(500).json({ message: "Internal server error", success: false });
+    }
+};

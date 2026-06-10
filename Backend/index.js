@@ -7,9 +7,10 @@ import userRouter from './Routes/User.js';
 import companyRouter from './Routes/Company.js';
 import jobRouter from './Routes/Job.js';
 import applicationRouter from './Routes/Application.js';
+import messageRouter from './Routes/Message.js';
+import { app, server } from './socket/socket.js';
 
-dotenv.config({});
-const app = express();
+dotenv.config({});  
 
 // Middlewares...
 app.use(express.json());
@@ -19,7 +20,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin: ["http://localhost:5173", "https://jobifyhub.vercel.app"], // Allow both local and deployed frontend
   credentials: true, // Allow cookies to be sent
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"],  
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
@@ -32,12 +33,13 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/company', companyRouter);
 app.use('/api/v1/job', jobRouter);
 app.use('/api/v1/application', applicationRouter);
+app.use('/api/v1/message', messageRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to Job Portal');
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   mongoDb();
   console.log(`Server is running on port ${PORT}`);
 });

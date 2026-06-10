@@ -34,10 +34,15 @@ const JobSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    sector: {
+        type: String,
+        enum: ['formal', 'informal'],
+        default: 'formal',
+        required: true,
+    },
     company:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Company',
-        required:true,
     },
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,

@@ -100,7 +100,7 @@ const Messages = () => {
                 className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 mb-2 ${selectedUser?._id === c._id ? 'bg-indigo-50 border border-indigo-100 shadow-sm' : 'hover:bg-gray-50 border border-transparent'}`}
               >
                 <div className="relative">
-                  <img src={c.profile?.profilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons"} alt="profile" className="w-12 h-12 rounded-full object-cover border border-gray-200" />
+                  <img src={c.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"} alt="profile" className="w-12 h-12 rounded-full object-cover border border-gray-200" />
                   {onlineUsers.includes(c._id) && (
                     <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
                   )}
@@ -120,7 +120,7 @@ const Messages = () => {
             <>
               {/* Chat Header */}
               <div className="p-6 border-b border-gray-100 flex items-center gap-4 bg-white/50 backdrop-blur-md z-10 shadow-sm">
-                 <img src={selectedUser.profile?.profilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons"} alt="profile" className="w-12 h-12 rounded-full object-cover shadow-sm" />
+                 <img src={selectedUser.Profile?.ProfilePhoto || "https://thumbs.dreamstime.com/b/default-profile-picture-avatar-user-icon-person-head-icons-anonymous-male-female-businessman-photo-placeholder-social-network-272206807.jpg"} alt="profile" className="w-12 h-12 rounded-full object-cover shadow-sm" />
                  <div>
                    <h2 className="font-extrabold text-xl text-gray-800">{selectedUser.Fullname}</h2>
                    <p className="text-sm text-indigo-600 font-semibold">{selectedUser.Role === 'student' ? 'Applicant' : 'Recruiter'}</p>

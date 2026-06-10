@@ -109,7 +109,7 @@ function SignUp() {
   }, [user]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-600 py-10 mt-16">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-600 py-10">
       <div className="bg-white/70 backdrop-blur-xl border border-white/50 p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="flex justify-center mb-4">
           <h1 className="text-3xl font-extrabold text-gray-800">

@@ -28,6 +28,14 @@ const persistor = persistStore(store);
 
 const appRouter = createBrowserRouter([
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
     path: "/",
     element: <App />,
     children: [
@@ -36,82 +44,48 @@ const appRouter = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
-        element: (
-          <Login />
-        ),
-      },
-      {
-        path: "/signup",
-        element: (
-          <Signup />
-        ),
-      },
-      {
         path: "/jobs",
-        element: (
-          <Jobs />
-        ),
+        element: <Jobs />,
       },
       {
         path: "/jobs/description/:id",
-        element: (
-          <JobDescription />
-        ),
+        element: <JobDescription />,
       },
       {
         path: "/messages",
-        element: (
-          <Messages />
-        ),
+        element: <Messages />,
       },
       {
         path: "/browse",
-        element: (
-          <Browse />
-        ),
+        element: <Browse />,
       },
       {
         path: "/profile",
-        element: (
-          <Profile />
-        ),
+        element: <Profile />,
       },
       {
         path: "/admin/companies",
-        element: (
-          <ProtectedRoute><Companies /></ProtectedRoute>
-        ),
+        element: <ProtectedRoute><Companies /></ProtectedRoute>,
       },
       {
         path: "/admin/companies/create",
-        element: (
-          <ProtectedRoute><CompanyCreate /></ProtectedRoute>
-        ),
+        element: <ProtectedRoute><CompanyCreate /></ProtectedRoute>,
       },
       {
         path: "/admin/companies/:id",
-        element: (
-           <ProtectedRoute><CompanySetup /></ProtectedRoute>  
-        ),
+        element: <ProtectedRoute><CompanySetup /></ProtectedRoute>,
       },
       {
         path: "/admin/jobs",
-        element: (
-          <ProtectedRoute><AdminJob /></ProtectedRoute> 
-        ),
+        element: <ProtectedRoute><AdminJob /></ProtectedRoute>,
       },
       {
         path: "/admin/job/create",
-        element: (
-          <ProtectedRoute> <PostJob /></ProtectedRoute>    
-        ),
+        element: <ProtectedRoute><PostJob /></ProtectedRoute>,
       },
       {
         path: "/admin/job/:id/applicants",
-        element: (
-            <ProtectedRoute> <Applicants /></ProtectedRoute>
-        ),
+        element: <ProtectedRoute><Applicants /></ProtectedRoute>,
       },
     ],
   }

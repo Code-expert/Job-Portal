@@ -171,7 +171,7 @@ function Navbar() {
                        <p className="text-sm font-bold text-gray-800 truncate">{user?.Fullname}</p>
                        <p className="text-xs text-gray-500 truncate">{user?.Email}</p>
                     </div>
-                    {user?.Role === "student" && (
+                    {user?.Role !== "recruiter" && (
                       <Link
                         to="/profile"
                         className="w-full flex items-center gap-3 text-left px-3 py-2.5 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-700 rounded-xl transition-colors"
@@ -265,7 +265,7 @@ function Navbar() {
                    </>
                  ) : (
                    <>
-                     {user?.Role === "student" && (
+                     {user?.Role !== "recruiter" && (
                        <button onClick={() => navigateTo("/profile")} className="w-full flex items-center justify-center gap-2 text-indigo-700 bg-indigo-50 font-bold px-5 py-3 rounded-xl">
                          <ImProfile /> Profile
                        </button>

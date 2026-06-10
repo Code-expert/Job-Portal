@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { MoreHorizontal } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSelectedUser } from "../../store/chatSlice";
 import axios from "axios";
 import { APPLICATION_API_END_POINT } from "../../constant";
 import { toast } from "react-toastify";
@@ -10,6 +12,8 @@ const shortlistingStatus = ["Accepted", "Rejected"];
 
 const ApplicantsTable = () => {
   const { applicants } = useSelector((store) => store.application);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [dropdownOpenId, setDropdownOpenId] = useState(null);
   const dropdownRefs = useRef({});
 
@@ -110,6 +114,17 @@ const ApplicantsTable = () => {
                           {status}
                         </button>
                       ))}
+                      {item?.Applicant?.Profile?.resume && (
+                        <button
+                          onClick={() => {
+                            dispatch(setSelectedUser(item.Applicant));
+                            navigate("/messages");
+                          }}
+                          className="block w-full text-left p-3 hover:bg-gray-100 transition border-t border-gray-100 text-indigo-600 font-medium"
+                        >
+                          Message
+                        </button>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>

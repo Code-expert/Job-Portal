@@ -1,9 +1,9 @@
-// Create a new file like apiConfig.js
 const isProduction = import.meta.env.PROD || false;
 
-const BASE_URL = isProduction 
+// Uses the .env VITE_API_URL if it exists, otherwise falls back to production/localhost logic
+const BASE_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || (isProduction 
   ? "https://jobportal-backend-12y8.onrender.com" 
-  : "http://localhost:3000";
+  : "http://localhost:3000");
 
  const USER_API_END_POINT = `${BASE_URL}/api/v1/user`;
  export default USER_API_END_POINT;
